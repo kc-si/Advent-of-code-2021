@@ -10,7 +10,7 @@ if __FILE__ == $0
 
     # puts (input)
 
-    file1 = File.open(input, 'r+')   # ("/home/code/git001/test/#{input}", 'w')
+    file1 = File.open(input, 'r')   # ("/home/code/git001/test/#{input}", 'w')
     # puts file1
 
     numbers = [0,1]
