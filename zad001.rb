@@ -54,6 +54,6 @@ if __FILE__ == $0
   end
 
 
-  puts("Increased numbers caount:#{i}")
+  puts("Increased numbers caount:#{counter}")
 
 end
