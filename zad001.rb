@@ -11,9 +11,9 @@ if __FILE__ == $0
   # F: 716 (increased)
   # G: 769 (increased)
   # H: 792 (increased)
-  
+
   # In this example, there are 5 sums that are larger than the previous sum.
-  
+
   # Consider sums of a three-measurement sliding window. How many sums are larger than the previous sum?
   # Koniec tresci. -----------------------------------------------------------------------------------
 
@@ -39,14 +39,14 @@ if __FILE__ == $0
   puts("a.class: #{a.class}, a: #{a}")
   puts("i.class: #{counter.class}, a: #{counter}")
 
-  numbers.each {|x|  counetr+=1}
+  numbers.each {|x|  counter+=1}
   puts("All numbers count: #{counter}")
-  
+
   counter = 0
 
   numbers.each do |x|
     if x>a
-      counter+=counter
+      counter+=1
       a=x
     else
       a=x
