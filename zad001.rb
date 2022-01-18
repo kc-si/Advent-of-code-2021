@@ -18,7 +18,7 @@ if __FILE__ == $0
   # Koniec tresci. -----------------------------------------------------------------------------------
 
 
-  puts (' Type filename with extension .txt (or type EXIT if you want to quit) end press ENTER :')
+  puts(' Type filename with extension .txt (or type EXIT if you want to quit) end press ENTER :')
   filee = gets # .to_s # roznica gets, STDIN.gets $stdin.gets
 
 
