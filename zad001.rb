@@ -36,30 +36,17 @@ if __FILE__ == $0
   a = numbers[0]
   counter = 0
 
-  puts ("a.class: #{a.class}, a: #{a}")
-  puts ("i.class: #{i.class}, a: #{i}")
+  puts("a.class: #{a.class}, a: #{a}")
+  puts("i.class: #{counter.class}, a: #{counter}")
 
-  numbers.each {|x|  i+=1}
-  puts ("All numbers count: #{i}")
-
-
-
-  # block_1{
-    # i+=1
-    # a=x
-  # }
-
-    # def increase1(a,x)
-      # a=x
-      # @i += 1
-
-    # end
-
-    i = 0
+  numbers.each {|x|  counetr+=1}
+  puts("All numbers count: #{counter}")
+  
+  counter = 0
 
   numbers.each do |x|
     if x>a
-      i+=1
+      counter+=counter
       a=x
     else
       a=x
@@ -67,6 +54,6 @@ if __FILE__ == $0
   end
 
 
-  puts ("Increased numbers caount:#{i}")
+  puts("Increased numbers caount:#{i}")
 
 end
