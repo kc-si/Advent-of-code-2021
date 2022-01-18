@@ -1,7 +1,7 @@
 if __FILE__ ==$0
 
   # Tresc:
-
+  #
   # Instead, consider sums of a three-measurement sliding window. Again considering the above example:
 
   # 199  A
