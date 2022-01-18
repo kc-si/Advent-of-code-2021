@@ -34,7 +34,7 @@ if __FILE__ == $0
 
 
   a = numbers[0]
-  i = 0
+  counter = 0
   @i = i
 
   puts ("a.class: #{a.class}, a: #{a}")
