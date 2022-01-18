@@ -35,7 +35,7 @@ if __FILE__ ==$0
   # Consider sums of a three-measurement sliding window. How many sums are larger than the previous sum?
   # ----------koniec tresci------------------------------------------------------
 
-  puts (' Type filename with extension .txt (or type EXIT if you want to quit) end press ENTER :')
+  puts(' Type filename with extension .txt (or type EXIT if you want to quit) end press ENTER :')
   filee = gets # .to_s # roznica gets, STDIN.gets $stdin.gets
 
 
@@ -51,31 +51,28 @@ if __FILE__ ==$0
 
 
   a = numbers[0]
+  counter = 0
+
   i = 0
-  # @i = i
   j = 0
-  k = 0
 
-  puts ("a.class: #{a.class}, a: #{a}")
-  puts ("i.class: #{i.class}, a: #{i}")
+  puts("a.class: #{a.class}, a: #{a}")
+  puts("counter.class: #{counter.class}, counter: #{counter}")
 
-  numbers.each {|x|  j+=1}
-  puts ("All numbers count: #{j}")
+  numbers.each {|x|  counter+=1}
+  puts("All numbers count: #{counter}")
 
-  i = 0
+  counter = 0
 
-  c = (numbers[k] + numbers[k+1] + numbers[k+2]) #< (numbers[k+1] + numbers[k+2] + numbers[k+3])
-  puts c,k,j
 
-  until k <= (j-4) do
-    if (numbers[k] + numbers[k+1] + numbers[k+2]) < (numbers[k+1] + numbers[k+2] + numbers[k+3])
-       i += 1
+
+  while !numbers[j+3].nil? do
+    if (numbers[j] + numbers[j+1] + numbers[j+2]) < (numbers[j+1] + numbers[j+2] + numbers[j+3])
+      counter += 1
     end
-      k += 1
+      j += 1
   end
 
-  puts ("Increased numbers count:#{i}")
-
-
+  puts("Increased numbers count:#{counter}")
 
 end
