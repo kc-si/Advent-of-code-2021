@@ -35,44 +35,59 @@ if __FILE__ ==$0
   # Consider sums of a three-measurement sliding window. How many sums are larger than the previous sum?
   # ----------koniec tresci------------------------------------------------------
 
-  puts(' Type filename with extension .txt (or type EXIT if you want to quit) end press ENTER :')
-  filee = gets # .to_s # roznica gets, STDIN.gets $stdin.gets
-
-
-  # break if input == "exit\n"
-
-  numbers = []
-
-  # File.readable? (input) do
-  File.read("input").each_line {|line| numbers << line.to_f}
-
-
-  #  puts("Numbers from file: \n #{numbers}")
-
-
-  a = numbers[0]
-  counter = 0
 
   i = 0
-  j = 0
+  while i<5 do
+      puts(' Type filename with extension if exist (or type EXIT if you want to quit) end press ENTER :')
+      filee = gets
+      filee = filee.chop
 
-  puts("a.class: #{a.class}, a: #{a}")
-  puts("counter.class: #{counter.class}, counter: #{counter}")
+      break if filee == "exit"
 
-  numbers.each {|x|  counter+=1}
-  puts("All numbers count: #{counter}")
+      numbers = []
 
-  counter = 0
+      if File.readable? (filee)
+        File.read(filee).each_line {|line| numbers << line.to_f}
+        break
+      else
+          puts('Wrong filename or file not exist. Try again.')
+          i += 1
+          next
+      end
 
-
-
-  while !numbers[j+3].nil? do
-    if (numbers[j] + numbers[j+1] + numbers[j+2]) < (numbers[j+1] + numbers[j+2] + numbers[j+3])
-      counter += 1
-    end
-      j += 1
   end
 
-  puts("Increased numbers count:#{counter}")
+    if filee != "exit" and File.readable? (filee) then
+
+
+      #  puts("Numbers from file: \n #{numbers}")
+
+
+    a = numbers[0]
+    counter = 0
+
+    i = 0
+    j = 0
+
+    puts("a.class: #{a.class}, a: #{a}")
+    puts("counter.class: #{counter.class}, counter: #{counter}")
+
+    numbers.each {|x|  counter+=1}
+    puts("All numbers count: #{counter}")
+
+    counter = 0
+
+
+
+    while !numbers[j+3].nil? do
+      if (numbers[j] + numbers[j+1] + numbers[j+2]) < (numbers[j+1] + numbers[j+2] + numbers[j+3])
+        counter += 1
+      end
+        j += 1
+    end
+
+    puts("Increased numbers count:#{counter}")
+
+  end
 
 end
