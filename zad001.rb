@@ -58,8 +58,14 @@ if __FILE__ == $0
 
     i = 0
 
-  numbers.each { |x| if x>a then i+=1   # main
-  a=x else a=x end }
+  numbers.each do |x|
+    if x>a
+      i+=1
+      a=x
+    else
+      a=x
+    end
+  end
 
 
   puts ("Increased numbers caount:#{i}")
