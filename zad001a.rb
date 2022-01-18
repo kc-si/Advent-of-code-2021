@@ -1,6 +1,10 @@
 if __FILE__ ==$0
 
+<<<<<<< HEAD
   # Task:
+=======
+  # Tresc:
+>>>>>>> d37d299b87a20f886020e676e3d75e5f2d59bb64
   #
   # Instead, consider sums of a three-measurement sliding window. Again considering the above example:
   #
