@@ -16,7 +16,10 @@ if __FILE__ == $0
   # 260      G H
   # 263        H
   #
-  # Start by comparing the first and second three-measurement windows. The measurements in the first window are marked A (199, 200, 208); their sum is 199 + 200 + 208 = 607. The second window is marked B (200, 208, 210); its sum is 618. The sum of measurements in the second window is larger than the sum of the first, so this first comparison increased.
+  # Start by comparing the first and second three-measurement windows. The measurements in the first window are
+  # marked A (199, 200, 208); their sum is 199 + 200 + 208 = 607. The second window is marked B (200, 208, 210);
+  # its sum is 618. The sum of measurements in the second window is larger than the sum of the first, so this first
+  # comparison increased.
   #
   # Your goal now is to count the number of times the sum of measurements in this sliding window increases from the previous sum. So, compare A with B, then compare B with C, then C with D, and so on. Stop when there aren't enough measurements left to create a new three-measurement sum.
   #
@@ -40,15 +43,15 @@ if __FILE__ == $0
   i = 0
   while i<5 do
       puts(' Type filename with extension if exist (or type EXIT if you want to quit) end press ENTER :')
-      filee = gets
-      filee = filee.chop
+      in_file = gets
+      in_file = in_file.chop
 
-      break if filee == "exit"
+      break if in_file == "exit"
 
       numbers = []
 
-      if File.readable? (filee)
-        File.read(filee).each_line {|line| numbers << line.to_f}
+      if File.readable? (in_file)
+        File.read(in_file).each_line {|line| numbers << line.to_f}
         break
       else
           puts('Wrong filename or file not exist. Try again.')
@@ -58,36 +61,25 @@ if __FILE__ == $0
 
   end
 
-  if filee != "exit" and File.readable? (filee) then
+  if in_file != "exit" and File.readable? (in_file) then
 
+    puts("The number of all measurements: #{numbers.count}")
 
-      #  puts("Numbers from file: \n #{numbers}")
-
-
-    a = numbers[0]
-    counter = 0
-
-    i = 0
-    j = 0
-
-    puts("a.class: #{a.class}, a: #{a}")
-    puts("counter.class: #{counter.class}, counter: #{counter}")
-
-    numbers.each {|x|  counter+=1}
-    puts("All numbers count: #{counter}")
+    # main
 
     counter = 0
 
+    WINDOWSIZE = 3
 
+    last_left_window_beginning = numbers.count - WINDOWSIZE - 1
 
-    while !numbers[j+3].nil? do
-      if (numbers[j] + numbers[j+1] + numbers[j+2]) < (numbers[j+1] + numbers[j+2] + numbers[j+3])
+    (0..last_left_window_beginning).each do |left_window_beginning|
+      if numbers[left_window_beginning] < numbers[left_window_beginning+WINDOWSIZE]
         counter += 1
       end
-        j += 1
     end
 
-    puts("Increased numbers count:#{counter}")
+    puts("Sums of 3 larger than previous : #{counter}")
 
   end
 

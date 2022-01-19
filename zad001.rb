@@ -18,16 +18,12 @@ if __FILE__ == $0
   # Koniec tresci. -----------------------------------------------------------------------------------
 
 
-  puts(' Type filename with extension .txt (or type EXIT if you want to quit) end press ENTER :')
-  filee = gets # .to_s # roznica gets, STDIN.gets $stdin.gets
 
-
-  # break if input == "exit\n"
 
   numbers = []
 
   # File.readable? (input) do
-    File.read("input").each_line {|line| numbers << line.to_f}
+    File.read("input1").each_line {|line| numbers << line.to_f}
 
 
   #  puts("Numbers from file: \n #{numbers}")
