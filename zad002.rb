@@ -50,6 +50,8 @@ if __FILE__ == $0
 
     # main
 
+      position = {horizontal: 0, depth: 0}
+
       move_values.each do |value|
       case
       when value.include?('forward') then position[:horizontal] += (value.delete"a-z").to_f
