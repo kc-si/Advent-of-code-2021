@@ -35,17 +35,16 @@ if __FILE__ == $0
   #  -------------------------------------------------------------------------------------
 
   i = 0
-  while i<5 do
+while i<5 do
     puts(' Type filename with extension if exist (or type EXIT if you want to quit) end press ENTER :')
     input_file = gets
     input_file = input_file.chop
 
     break if input_file == "exit"
 
-    binary_diagnostic_report = []
 
     if File.readable? (input_file)
-      File.read(input_file).each_line {|line| binary_diagnostic_report << line.chop}
+      input_data = File.read(input_file)
       break
     else
         puts('Wrong filename or file not exist. Try again.')
@@ -53,7 +52,13 @@ if __FILE__ == $0
         next
     end
 
-  end
+end
+
+if input_file != "exit" and File.readable? (input_file) then
+
+  #  main
+
+  input_data = input_data.split("\n")
 
   i = 0
   j = 0
@@ -63,41 +68,36 @@ if __FILE__ == $0
 
   puts("Bin size : #{binary_diagnostic_report[0].size}")
 
+  (binary_diagnostic_report[0].size).times do
 
-  if input_file != "exit" and File.readable? (input_file) then
+    binary_diagnostic_report.each do |value|
 
-    # main
-
-    (binary_diagnostic_report[0].size).times do
-
-      binary_diagnostic_report.each do |value|
-
-        if value[j].to_i == 1
-          i += 1
-        else
-          i -= 1
-        end
-
-      end
-
-      if i <= 0
-        gamma_rate << "0"
-        epsilon_rate << "1"
+      if value[j].to_i == 1
+        i += 1
       else
-        gamma_rate << "1"
-        epsilon_rate << "0"
+          i -= 1
       end
-
-
-      i = 0
-      j += 1
 
     end
 
-    power_consumption = gamma_rate.to_i(2) * epsilon_rate.to_i(2)
-    puts("Gamma rate: #{gamma_rate}, epsilon_rate : #{epsilon_rate}.",)
-    puts("Power consumption : #{power_consumption} ")
+    if i <= 0
+      gamma_rate << "0"
+      epsilon_rate << "1"
+    else
+      gamma_rate << "1"
+      epsilon_rate << "0"
+    end
+
+
+    i = 0
+    j += 1
 
   end
+
+  power_consumption = gamma_rate.to_i(2) * epsilon_rate.to_i(2)
+  puts("Gamma rate: #{gamma_rate}, epsilon_rate : #{epsilon_rate}.",)
+  puts("Power consumption : #{power_consumption} ")
+
+end
 
 end

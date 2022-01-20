@@ -28,15 +28,14 @@ if __FILE__ == $0
   i = 0
   while i<5 do
       puts(' Type filename with extension if exist (or type EXIT if you want to quit) end press ENTER :')
-      in_file = gets
-      in_file = in_file.chop
+      input_file = gets
+      input_file = input_file.chop
 
-      break if in_file == "exit"
+      break if input_file == "exit"
 
-      move_values = []
 
-      if File.readable? (in_file)
-        File.read(in_file).each_line {|line| move_values << line.chop}
+      if File.readable? (input_file)
+        input_data = File.read(input_file)
         break
       else
           puts('Wrong filename or file not exist. Try again.')
@@ -46,22 +45,60 @@ if __FILE__ == $0
 
   end
 
-  if in_file != "exit" and File.readable? (in_file) then
+  if input_file != "exit" and File.readable? (input_file) then
 
-    # main
+      # main
 
-      position = {horizontal: 0, depth: 0}
+    initial_position = {horizontal: 0, depth: 0}
 
-      move_values.each do |value|
-      case
-      when value.include?('forward') then position[:horizontal] += (value.delete"a-z").to_f
-      when value.include?('down') then position[:depth] += (value.delete"a-z").to_f
-      when value.include?('up') then position[:depth] -= (value.delete"a-z").to_f
+    def parse_input(input_data)
+
+      steps = []
+
+      input_data = input_data.split("\n")
+
+      input_data.each do |data|
+
+        tmp = {forward: 0, down: 0, up: 0}
+        tmp[:"#{(data.split(" "))[0]}"] = ("#{(data.split(" "))[1]}").to_f  # a bit heavy...? maybe use one morevariable
+        steps << tmp
+
       end
+      return steps
+
     end
 
-    puts("Horizontal position : #{position[:horizontal]}, and depth : #{position[:depth]}.")
-    puts("Multiply horizontal and depth : #{position[:horizontal] * position[:depth]} ")
+    def calculate_position(initial_position, steps)
+
+      position = initial_position  # better to be clear, or just use initial_position?
+
+      steps.each do |step|
+
+        position[:horizontal] += step[:forward]
+        position[:depth] += step[:down]
+        position[:depth] -= step[:up]
+
+      end
+      return position
+
+    end
+
+    steps = parse_input(input_data)
+
+    final_position = calculate_position(initial_position, steps)
+
+
+
+    # input_data.each do |value|
+    #   case
+    #   when value.include?('forward') then position[:horizontal] += (value.delete"a-z").to_f
+    #   when value.include?('down') then position[:depth] += (value.delete"a-z").to_f
+    #   when value.include?('up') then position[:depth] -= (value.delete"a-z").to_f
+    #   end
+    # end
+
+    puts("Horizontal position : #{final_position[:horizontal]}, and depth : #{final_position[:depth]}.")
+    puts("Multiply horizontal and depth : #{final_position[:horizontal] * final_position[:depth]} ")
 
   end
 

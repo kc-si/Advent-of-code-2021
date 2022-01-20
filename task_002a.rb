@@ -36,34 +36,35 @@ if __FILE__ == $0
 # horizontal position by your final depth?
 #  -------------------------------------------------------------------------------------
 
-  i = 0
-  while i<5 do
-      puts(' Type filename with extension if exist (or type EXIT if you want to quit) end press ENTER :')
-      in_file = gets
-      in_file = in_file.chop
+i = 0
+while i<5 do
+    puts(' Type filename with extension if exist (or type EXIT if you want to quit) end press ENTER :')
+    input_file = gets
+    input_file = input_file.chop
 
-      break if in_file == "exit"
+    break if input_file == "exit"
 
-      move_values = []
 
-      if File.readable? (in_file)
-        File.read(in_file).each_line {|line| move_values << line.chop}
-        break
-      else
-          puts('Wrong filename or file not exist. Try again.')
-          i += 1
-          next
-      end
+    if File.readable? (input_file)
+      input_data = File.read(input_file)
+      break
+    else
+        puts('Wrong filename or file not exist. Try again.')
+        i += 1
+        next
+    end
 
-  end
+end
 
-  if in_file != "exit" and File.readable? (in_file) then
+if input_file != "exit" and File.readable? (input_file) then
 
     # main
 
-      position = {horizontal: 0, depth: 0, aim: 0}
+    input_data = input_data.split("\n")
 
-      move_values.each do |value|
+    position = {horizontal: 0, depth: 0, aim: 0}
+
+    input_data.each do |value|
       case
       when value.include?('forward') then position[:horizontal] += (value.delete"a-z").to_f
         position[:depth] += (position[:aim] * (value.delete"a-z").to_f)
