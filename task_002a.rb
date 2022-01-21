@@ -1,4 +1,4 @@
-if __FILE__ == $0
+require "./read_file.rb"
 
 # Task:
 #   In addition to horizontal position and depth, you'll also need to track a third value, aim, which also starts at 0. The commands also mean something entirely different than you first thought:
@@ -36,46 +36,45 @@ if __FILE__ == $0
 # horizontal position by your final depth?
 #  -------------------------------------------------------------------------------------
 
-i = 0
-while i<5 do
-    puts(' Type filename with extension if exist (or type EXIT if you want to quit) end press ENTER :')
-    input_file = gets
-    input_file = input_file.chop
+def parse_input(input_data)
+  steps = []
+  lines = input_data.split("\n")
 
-    break if input_file == "exit"
-
-
-    if File.readable? (input_file)
-      input_data = File.read(input_file)
-      break
-    else
-        puts('Wrong filename or file not exist. Try again.')
-        i += 1
-        next
-    end
-
+  lines.each do |line|
+    direction = line.split(" ")[0].to_sym
+    distance = line.split(" ")[1].to_f
+    steps << {direction: direction, distance: distance}
+  end
+  steps
 end
 
-if input_file != "exit" and File.readable? (input_file) then
+def count_position(initial_position, steps)
+  position = initial_position
 
-    # main
-
-    input_data = input_data.split("\n")
-
-    position = {horizontal: 0, depth: 0, aim: 0}
-
-    input_data.each do |value|
-      case
-      when value.include?('forward') then position[:horizontal] += (value.delete"a-z").to_f
-        position[:depth] += (position[:aim] * (value.delete"a-z").to_f)
-      when value.include?('down') then position[:aim] += (value.delete"a-z").to_f
-      when value.include?('up') then position[:aim] -= (value.delete"a-z").to_f
-      end
+  steps.each do |step|
+    case step[:direction]
+    when :forward then position[:horizontal] += step[:distance]
+      position[:depth] += (position[:aim] * step[:distance])
+    when :down then position[:aim] += step[:distance]
+    when :up then position[:aim] -= step[:distance]
     end
-
-    puts("Horizontal position : #{position[:horizontal]}, depth : #{position[:depth]}.",)
-    puts("Multiply horizontal and depth : #{position[:horizontal] * position[:depth]} ")
-
   end
+  position
+end
 
+def calculate_answer(input_data, initial_position)
+  steps = parse_input(input_data)
+  final_position = count_position(initial_position, steps)
+  answer = final_position[:horizontal] * final_position[:depth]
+end
+
+# main
+
+if __FILE__ == $0
+  initial_position = {horizontal: 0, depth: 0, aim: 0}
+
+  input_data = read_file
+
+  answer = calculate_answer(input_data, initial_position)
+  puts("Multiply horizontal and depth : #{answer} ")
 end
