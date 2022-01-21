@@ -1,4 +1,5 @@
-require "./read_file.rb"
+require "./read_file2.rb"
+require 'debug'
 
 # Task:
 #   In addition to horizontal position and depth, you'll also need to track a third value, aim, which also starts at 0. The commands also mean something entirely different than you first thought:
@@ -74,6 +75,7 @@ if __FILE__ == $0
   initial_position = {horizontal: 0, depth: 0, aim: 0}
 
   input_data = read_file
+  return if input_data.nil?
 
   answer = calculate_answer(input_data, initial_position)
   puts("Multiply horizontal and depth : #{answer} ")
