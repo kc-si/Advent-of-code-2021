@@ -1,4 +1,4 @@
-def read_file  #(file)
+def read_file
   file = ARGV[0]
 
   if file
