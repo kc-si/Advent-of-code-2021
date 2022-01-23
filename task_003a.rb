@@ -132,11 +132,11 @@ def calculate_rating(binary_diagnostic_report)
   rating
 end
 
-def calculate_answer(input_data)
+def calculate_life_support_rating(input_data)
   binary_diagnostic_report = parse_input(input_data)
   rating = calculate_rating(binary_diagnostic_report)
 
-  life_support_rating = rating[:oxygen_generator_rating].to_i(2) * rating[:co2_scrubber_rating].to_i(2)
+  rating[:oxygen_generator_rating].to_i(2) * rating[:co2_scrubber_rating].to_i(2)
 end
 
 
@@ -147,7 +147,7 @@ if __FILE__ == $0
   input_data = read_file
   return if input_data.nil?
 
-  answer = calculate_answer(input_data)
+  answer = calculate_life_support_rating(input_data)
   puts("Answer : #{answer} ")
 
 end
