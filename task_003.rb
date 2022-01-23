@@ -69,13 +69,13 @@ def count_gamma_epsilon_rate(binary_diagnostic_report)
     rate = 0
     bit_position += 1
   end
-  rates = {gamma_rate: "#{gamma_rate}", epsilon_rate: "#{epsilon_rate}"}
+  rates = {gamma_rate: gamma_rate, epsilon_rate: epsilon_rate}
 end
 
-def calculate_answer(input_data)
+def calculate_power_consumption(input_data)
   binary_diagnostic_report = parse_input(input_data)
   rates = count_gamma_epsilon_rate(binary_diagnostic_report)
-  power_consumption = rates[:gamma_rate].to_i(2) * rates[:epsilon_rate].to_i(2)
+  rates[:gamma_rate].to_i(2) * rates[:epsilon_rate].to_i(2)
 end
 
 if __FILE__ == $0
@@ -85,7 +85,7 @@ if __FILE__ == $0
   input_data = read_file
   return if input_data.nil?
 
-  answer = calculate_answer(input_data)
+  answer = calculate_power_consumption(input_data)
   puts("Answer : #{answer} ")
 
 end

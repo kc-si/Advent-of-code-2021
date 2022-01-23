@@ -53,7 +53,8 @@ def count_position(initial_position, steps)
 
   steps.each do |step|
     case step[:direction]
-    when :forward then position[:horizontal] += step[:distance]
+    when :forward
+      position[:horizontal] += step[:distance]
       position[:depth] += (position[:aim] * step[:distance])
     when :down then position[:aim] += step[:distance]
     when :up then position[:aim] -= step[:distance]
@@ -62,20 +63,19 @@ def count_position(initial_position, steps)
   position
 end
 
-def calculate_answer(input_data, initial_position)
+def calculate_answer(input_data, initial_position = {horizontal: 0, depth: 0, aim: 0})
   steps = parse_input(input_data)
   final_position = count_position(initial_position, steps)
-  answer = final_position[:horizontal] * final_position[:depth]
+  final_position[:horizontal] * final_position[:depth]
 end
 
 # main
 
 if __FILE__ == $0
-  initial_position = {horizontal: 0, depth: 0, aim: 0}
 
   input_data = read_file
   return if input_data.nil?
 
-  answer = calculate_answer(input_data, initial_position)
+  answer = calculate_answer(input_data)  # initial_position = {horizontal: 0, depth: 0, aim: 0}
   puts("Multiply horizontal and depth : #{answer} ")
 end

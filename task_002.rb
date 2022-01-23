@@ -67,7 +67,7 @@ def calculate_position(initial_position, steps)
   position
 end
 
-def calculate_answer(input_data, initial_position)
+def calculate_answer(input_data, initial_position = {horizontal: 0, depth: 0})
   steps = parse_input(input_data)
   final_position = calculate_position(initial_position, steps)
   final_position[:horizontal] * final_position[:depth]
@@ -79,8 +79,7 @@ if __FILE__ == $0
   input_data = read_file
   return if input_data.nil?
 
-  initial_position = {horizontal: 0, depth: 0}
-  answer = calculate_answer(input_data, initial_position)
+  answer = calculate_answer(input_data) #  initial_position = {horizontal: 0, depth: 0}
 
   puts("Answer : #{answer} ")
 end
