@@ -75,7 +75,7 @@ def bit_criteria(binary_diagnostic_report, common) # common can be: "most" or "l
 
   # binary_report = binary_diagnostic_report.dup  # can use this instead lines below
 
-  binary_report = []  # code from this line to
+  # code from this line ...
 
   most_common = find_common(binary_diagnostic_report, bit_position)
 
@@ -95,9 +95,9 @@ def bit_criteria(binary_diagnostic_report, common) # common can be: "most" or "l
     end
   end
 
-  bit_position += 1     # to here, is needed to not lose: binary_diagnostic report
+  bit_position += 1     # ... to here, is needed to not lose: binary_diagnostic report
 
-  while binary_report.size > 1 do
+  while (binary_report.size > 1 && bit_position < binary_diagnostic_report[0].size) do
     most_common = find_common(binary_report, bit_position)
 
     case common
@@ -117,7 +117,6 @@ def bit_criteria(binary_diagnostic_report, common) # common can be: "most" or "l
     end
 
     bit_position += 1
-    bit_position = 0 if bit_position == binary_diagnostic_report.size
   end
 
   binary_report[0].join
