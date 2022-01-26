@@ -1,5 +1,19 @@
 require "./lib/task_003a.rb"
 
+RSpec.describe "parse_input(input_data) - input data processing:" do
+  it " short input_data to binary_diagnostic_report" do
+    input_data = "100000101101\n011011010101\n000000111000\n110101110111\n110000001100\n"
+
+    binary_diagnostic_report = parse_input(input_data)
+
+    expect(binary_diagnostic_report).to eq([["1", "0", "0", "0", "0", "0", "1", "0", "1", "1", "0", "1"],
+    ["0", "1", "1", "0", "1", "1", "0", "1", "0", "1", "0", "1"],
+    ["0", "0", "0", "0", "0", "0", "1", "1", "1", "0", "0", "0"],
+    ["1", "1", "0", "1", "0", "1", "1", "1", "0", "1", "1", "1"],
+    ["1", "1", "0", "0", "0", "0", "0", "0", "1", "1", "0", "0"]])
+  end
+end
+
 RSpec.describe "bit_criteria - calculate one output number by bit criteria:" do    # RSpec. not neccecery
   it " with empty inputs" do
     binary_diagnostic_report = [[""]]

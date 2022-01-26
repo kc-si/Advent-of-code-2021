@@ -51,12 +51,7 @@ require 'pry'
 # answer in decimal, not binary.)
 
 def parse_input(input_data)
-  binary_diagnostic_report = []
-
-  input_data.split("\n").each do |binary_value|
-    binary_diagnostic_report << binary_value.chars   # eql each_char.to_a
-  end
-  binary_diagnostic_report
+  binary_diagnostic_report = input_data.split.map {|binary_value| binary_value.chars}
 end
 
 def find_common(binary_diagnostic_report, bit_position)
