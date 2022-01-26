@@ -73,6 +73,7 @@ def bit_criteria(binary_diagnostic_report, common)
   if binary_diagnostic_report.size >= 1
     binary_diagnostic_report[0].size.times do |bit_position|
       break if binary_diagnostic_report.size == 1
+
       most_common = find_common(binary_diagnostic_report, bit_position)
 
       binary_diagnostic_report = case common
