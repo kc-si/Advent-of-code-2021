@@ -1,5 +1,4 @@
 require "./lib/read_file"
-require 'pry'
 
 # Task
 # Next, you should verify the life support rating, which can be determined by multiplying the oxygen generator rating
@@ -63,55 +62,34 @@ def find_common(binary_diagnostic_report, bit_position)
     when 0 then most_common -= 1
     end
   end
-  # most_common = 1 if most_common >= 0
-  # most_common = 0 if most_common < 0
+
+  if most_common >= 0
+    most_common = "1"
+  else
+    most_common = "0"
+  end
   most_common
 end
 
-def bit_criteria(binary_diagnostic_report, common) # common can be: "most" or "least"
+def bit_criteria(binary_diagnostic_report, common)
   bit_position = 0
 
-  # binary_report = binary_diagnostic_report.dup  # can use this instead lines below
-
-  # code from this line ...
   if binary_diagnostic_report.size > 1
     most_common = find_common(binary_diagnostic_report, bit_position)
 
     case common
-    when "most" then
-      if most_common >= 0
-        binary_report = binary_diagnostic_report.reject {|value| value[bit_position] == "0"}
-      else
-        binary_report = binary_diagnostic_report.reject {|value| value[bit_position] == "1"}
-      end
-
-    when "least" then
-      if most_common >= 0
-        binary_report = binary_diagnostic_report.reject {|value| value[bit_position] == "1"}
-      else
-        binary_report = binary_diagnostic_report.reject {|value| value[bit_position] == "0"}
-      end
+    when "most" then  binary_report = binary_diagnostic_report.reject {|value| value[bit_position] != most_common}
+    when "least" then binary_report = binary_diagnostic_report.reject {|value| value[bit_position] == most_common}
     end
 
-    bit_position += 1     # ... to here, is needed to not lose: binary_diagnostic report
+    bit_position += 1
 
     while (binary_report.size > 1 && bit_position < binary_diagnostic_report[0].size) do
       most_common = find_common(binary_report, bit_position)
 
       case common
-      when "most" then
-        if most_common >= 0
-          binary_report.delete_if {|value| value[bit_position] == "0"} #delete_if can be: reject!
-        else
-          binary_report.delete_if {|value| value[bit_position] == "1"}
-        end
-
-      when "least" then
-        if most_common >= 0
-          binary_report.delete_if {|value| value[bit_position] == "1"}
-        else
-          binary_report.delete_if {|value| value[bit_position] == "0"}
-        end
+      when "most" then  binary_report.reject! {|value| value[bit_position] != most_common}
+      when "least" then binary_report.reject! {|value| value[bit_position] == most_common}
       end
 
       bit_position += 1
@@ -136,7 +114,7 @@ end
 
 def calculate_life_support_rating(input_data)
   binary_diagnostic_report = parse_input(input_data)
-  # binding.pry
+
   rating = calculate_rating(binary_diagnostic_report)
 
   rating[:oxygen_generator_rating].to_i(2) * rating[:co2_scrubber_rating].to_i(2)
