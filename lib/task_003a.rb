@@ -64,9 +64,9 @@ def find_common(binary_diagnostic_report, bit_position)
   end
 
   if most_common >= 0
-    most_common = "1"
+    most_common = '1'
   else
-    most_common = "0"
+    most_common = '0'
   end
   most_common
 end
@@ -78,8 +78,8 @@ def bit_criteria(binary_diagnostic_report, common)
     most_common = find_common(binary_diagnostic_report, bit_position)
 
     case common
-    when "most" then  binary_report = binary_diagnostic_report.reject {|value| value[bit_position] != most_common}
-    when "least" then binary_report = binary_diagnostic_report.reject {|value| value[bit_position] == most_common}
+    when 'most' then  binary_report = binary_diagnostic_report.select {|value| value[bit_position] == most_common}
+    when 'least' then binary_report = binary_diagnostic_report.reject {|value| value[bit_position] == most_common}
     end
 
     bit_position += 1
@@ -88,8 +88,8 @@ def bit_criteria(binary_diagnostic_report, common)
       most_common = find_common(binary_report, bit_position)
 
       case common
-      when "most" then  binary_report.reject! {|value| value[bit_position] != most_common}
-      when "least" then binary_report.reject! {|value| value[bit_position] == most_common}
+      when 'most' then  binary_report.select! {|value| value[bit_position] == most_common}
+      when 'least' then binary_report.reject! {|value| value[bit_position] == most_common}
       end
 
       bit_position += 1
@@ -97,7 +97,7 @@ def bit_criteria(binary_diagnostic_report, common)
   elsif binary_diagnostic_report.size == 1
     binary_report = binary_diagnostic_report
   else
-    binary_report = [["0"]]
+    binary_report = [['0']]
   end
 
   binary_report[0].join
@@ -106,8 +106,8 @@ end
 def calculate_rating(binary_diagnostic_report)
   rating = {oxygen_generator_rating: 0 , co2_scrubber_rating: 0 }
 
-  rating[:oxygen_generator_rating] = bit_criteria(binary_diagnostic_report, "most")
-  rating[:co2_scrubber_rating] = bit_criteria(binary_diagnostic_report, "least")
+  rating[:oxygen_generator_rating] = bit_criteria(binary_diagnostic_report, 'most')
+  rating[:co2_scrubber_rating] = bit_criteria(binary_diagnostic_report, 'least')
 
   rating
 end
