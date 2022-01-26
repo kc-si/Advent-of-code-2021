@@ -50,7 +50,7 @@ require './lib/read_file'
 # answer in decimal, not binary.)
 
 def parse_input(input_data)
-  binary_diagnostic_report = input_data.split.map {|binary_value| binary_value.chars}
+  input_data.split.map { |binary_value| binary_value.chars }
 end
 
 def find_common(binary_diagnostic_report, bit_position)
