@@ -89,7 +89,7 @@ def bit_criteria(binary_diagnostic_report, common)
 end
 
 def calculate_rating(binary_diagnostic_report)
-  rating = {oxygen_generator_rating: 0 , co2_scrubber_rating: 0 }
+  rating = { oxygen_generator_rating: 0, co2_scrubber_rating: 0 }
 
   rating[:oxygen_generator_rating] = bit_criteria(binary_diagnostic_report, 'most')
   rating[:co2_scrubber_rating] = bit_criteria(binary_diagnostic_report, 'least')
@@ -104,7 +104,6 @@ def calculate_life_support_rating(input_data)
 
   rating[:oxygen_generator_rating].to_i(2) * rating[:co2_scrubber_rating].to_i(2)
 end
-
 
 if __FILE__ == $0
 
