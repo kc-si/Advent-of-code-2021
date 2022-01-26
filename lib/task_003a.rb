@@ -1,4 +1,4 @@
-require "./lib/read_file"
+require './lib/read_file'
 
 # Task
 # Next, you should verify the life support rating, which can be determined by multiplying the oxygen generator rating
@@ -62,45 +62,33 @@ def find_common(binary_diagnostic_report, bit_position)
     when 0 then most_common -= 1
     end
   end
-
   if most_common >= 0
-    most_common = '1'
+    '1'
   else
-    most_common = '0'
+    '0'
   end
-  most_common
 end
 
 def bit_criteria(binary_diagnostic_report, common)
   bit_position = 0
 
-  if binary_diagnostic_report.size > 1
+  if binary_diagnostic_report.size >= 1
     most_common = find_common(binary_diagnostic_report, bit_position)
 
-    case common
-    when 'most' then  binary_report = binary_diagnostic_report.select {|value| value[bit_position] == most_common}
-    when 'least' then binary_report = binary_diagnostic_report.reject {|value| value[bit_position] == most_common}
-    end
+    while binary_diagnostic_report.size > 1 && bit_position < binary_diagnostic_report[0].size
+      most_common = find_common(binary_diagnostic_report, bit_position)
 
-    bit_position += 1
-
-    while (binary_report.size > 1 && bit_position < binary_diagnostic_report[0].size) do
-      most_common = find_common(binary_report, bit_position)
-
-      case common
-      when 'most' then  binary_report.select! {|value| value[bit_position] == most_common}
-      when 'least' then binary_report.reject! {|value| value[bit_position] == most_common}
+      binary_diagnostic_report = case common
+      when 'most' then  binary_diagnostic_report.select { |value| value[bit_position] == most_common }
+      when 'least' then binary_diagnostic_report.reject { |value| value[bit_position] == most_common }
       end
 
       bit_position += 1
     end
-  elsif binary_diagnostic_report.size == 1
-    binary_report = binary_diagnostic_report
   else
-    binary_report = [['0']]
+    binary_diagnostic_report = [['0']]
   end
-
-  binary_report[0].join
+  binary_diagnostic_report[0].join
 end
 
 def calculate_rating(binary_diagnostic_report)

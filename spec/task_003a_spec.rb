@@ -133,8 +133,8 @@ RSpec.describe "bit_criteria - calculate one output number by bit criteria:" do 
   end
 end
 
-RSpec.describe "calculate_life_support_rating(input_data)" do    # RSpec. not neccecery
-  it "calculates life support rating: 0 numbers in diagnostic report" do
+RSpec.describe "calculate_life_support_rating(input_data):" do    # RSpec. not neccecery
+  it "0 numbers in diagnostic report" do
     input_data = <<~INPUT
     INPUT
 
@@ -143,7 +143,7 @@ RSpec.describe "calculate_life_support_rating(input_data)" do    # RSpec. not ne
     expect(life_support_rating).to eq(0)
   end
 
-  it "calculates life support rating: only 1 number in diagnostic report" do
+  it "only 1 number in diagnostic report" do
     input_data = <<~INPUT
       100000101101
     INPUT
@@ -153,7 +153,7 @@ RSpec.describe "calculate_life_support_rating(input_data)" do    # RSpec. not ne
     expect(life_support_rating).to eq(4380649)
   end
 
-  it "calculates life support rating: 2 numbers in diagnostic report" do
+  it "2 numbers in diagnostic report" do
     input_data = <<~INPUT
       100000101101
       011011010101
@@ -164,7 +164,7 @@ RSpec.describe "calculate_life_support_rating(input_data)" do    # RSpec. not ne
     expect(life_support_rating).to eq(3660657)
   end
 
-  it "calculates life support rating: 5 numbers in diagnostic report" do
+  it "5 numbers in diagnostic report" do
     input_data = <<~INPUT
       100000101101
       011011010101
@@ -178,7 +178,7 @@ RSpec.describe "calculate_life_support_rating(input_data)" do    # RSpec. not ne
     expect(life_support_rating).to eq(193032)
   end
 
-  it "calculates life support rating: 20 numbers in diagnostic report" do
+  it "20 numbers in diagnostic report" do
     input_data = <<~INPUT
       100000101101
       011011010101
