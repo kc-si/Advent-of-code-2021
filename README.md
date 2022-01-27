@@ -3,12 +3,12 @@
 
 ### **Contents**
 
- **test/lib**  - scripts for task - each file named  **<em> task_0xxx.rb </em>**  works for task number (xxx), example:  
+ **test/lib**  - scripts for task - each file named  **<em> task_0xxx.rb </em>**  works for task number (xxx), example :   
  
 **<em> task_002.rb </em>**  - script for first task in day 2 in Advent of code  
  **<em> task_002a.rb </em>**  - script for second task in day 2 in Advent of code  
  
- files named **<em>  inputx  </em>** , input data files for exact day task, example:  
+ files named **<em>  inputx  </em>** , input data files for exact day task, where <em> x </em> is a day number,  example :  
  **<em> input3 </em>**  - input data file for tasks of day 3  
  
  **<em>read_file.rb </em>**  - library for reading data from input file
@@ -17,11 +17,11 @@
 
 ## Installation:
 
-You can just download repository and run each scripts from command line (exmaple):
+You can just download repository and run each scripts from command line,  exmaple :
 
       ruby task_002.rb
       
-   > then scripts ask you for input data file name with is: **<em> input2 </em>**  for this task  
+   > then scripts ask you for input data file name : **<em> input2 </em>**  for this task  
       
    or starting from day 3 task you can use form:
       
