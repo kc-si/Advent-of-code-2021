@@ -13,7 +13,7 @@
  
  **<em>read_file.rb </em>**  - library for reading data from input file
 
-**test/spec**  - specification/test files for scripts with same number
+**test/spec**  - specification/test files for scripts 
 
 ## Installation:
 
