@@ -11,7 +11,7 @@
  files named **<em>inputx</em>**, input data files for exact day task, example:  
  **<em>input3</em>** - input data file for tasks of day 3  
  
- **<em>./read_file</em>**- liblary for reading data from input file
+ **<em>read_file.rb</em>**- liblary for reading data from input file
 
 **test/spec**- specification/test files for scripts with same number
 
