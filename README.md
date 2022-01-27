@@ -17,7 +17,7 @@
 
 ## Installation:
 
-You can clone repository and run each scripts from command line (exmaple):
+You can just download repository and run each scripts from command line (exmaple):
 
       ruby task_002.rb
       
