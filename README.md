@@ -17,7 +17,7 @@
 
 ## Installation:
 
-You can just download repository and run each scripts from command line,  exmaple :
+You can just download repository, go to **<em> ./lib </em>** and run each scripts from command line,  exmaple :
 
       ruby task_002.rb
       
@@ -28,6 +28,8 @@ You can just download repository and run each scripts from command line,  exmapl
       ruby task_003.rb input3
 
    where input3 is a name of input data file.
+   
+   
    
    
 ## For spec files you need to install rspec:
