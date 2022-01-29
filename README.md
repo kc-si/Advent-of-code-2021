@@ -1,5 +1,5 @@
 # Scripts for Advent of Code 2021 edition
-## This project contain Ruby scripts to solve the tasks described in Advent of code 2021 edition.
+## This project contains Ruby scripts to solve the tasks described in Advent of code 2021 edition.
 
 ### **Contents**
 
@@ -28,3 +28,10 @@ You can just download repository and run each scripts from command line,  exmapl
       ruby task_003.rb input3
 
    where input3 is a name of input data file.
+   
+   
+## For spec files you need to install rspec:
+
+    gem install rspec
+    
+for more information just go https://github.com/rspec/rspec-metagem
