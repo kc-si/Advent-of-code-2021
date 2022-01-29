@@ -1,4 +1,4 @@
-require "./lib/task_003a.rb"
+require './lib/task_003a.rb'
 
 RSpec.describe "parse_input(input_data) - input data processing:" do
   it " short input_data to binary_diagnostic_report" do

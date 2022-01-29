@@ -1,4 +1,4 @@
-require "./lib/read_file.rb"
+require './read_file.rb'
 
 # Task:
 #

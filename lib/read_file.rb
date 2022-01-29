@@ -10,8 +10,8 @@ def read_file
 
   return if input_file == 'exit'
 
-  if File.readable?("./lib/#{input_file}")
-    input_data = File.read("./lib/#{input_file}")
+  if File.readable?("./#{input_file}")
+    input_data = File.read("./#{input_file}")
   else
     puts('Wrong filename or file not exist.')
   end
