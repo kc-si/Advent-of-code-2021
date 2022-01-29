@@ -1,4 +1,3 @@
-
 def read_file
   if ARGV[0]
     input_file = ARGV[0]

@@ -1,4 +1,4 @@
-require './read_file.rb'
+require_relative './read_file.rb'
 
 # The submarine has a bingo subsystem to help passengers (currently, you and the giant squid) pass the time.
 #  It automatically generates a random order in which to draw numbers and a

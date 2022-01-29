@@ -1,4 +1,4 @@
-require './read_file'
+require_relative './read_file'
 
 # Task
 # Next, you should verify the life support rating, which can be determined by multiplying the oxygen generator rating

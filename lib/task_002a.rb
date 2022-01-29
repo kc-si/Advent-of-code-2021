@@ -1,4 +1,4 @@
-require './read_file.rb'
+require_relative './read_file.rb'
 
 # Task:
 #   In addition to horizontal position and depth, you'll also need to track a third value, aim, which also starts at 0. The commands also mean something entirely different than you first thought:

@@ -1,4 +1,4 @@
-require './read_file.rb'
+require_relative './read_file.rb'
 
 # Task:
 #
