@@ -65,34 +65,32 @@ require_relative './read_file.rb'
 # Figure out which board will win last.
 
 def parse_input(input_data)
-  [input_data.split[0].split(',').map{ |variable| variable.to_i }].concat(
-    [input_data.split[1...nil].map{ |variable| variable.to_i }.each_slice(5).to_a.each_slice(5).to_a])
+  [input_data.split[0].split(',').map { |variable| variable.to_i }].concat(
+    [input_data.split[1...nil].map { |variable| variable.to_i }.each_slice(5).to_a.each_slice(5).to_a]
+  )
 end
 
 def check_board(numbers, board)
   board.each do |ary|
-    if ary.select { |value| numbers.include?(value) }.size == 5
-      return 1
-    end
+    return 1 if ary.select { |value| numbers.include?(value) }.size == 5
   end
   5.times do |j|
     temp = []
     5.times do |i|
       temp << board[i][j]
-      if temp.select { |value| numbers.include?(value) }.size == 5
-        return 1
-      end
+      return 1 if temp.select { |value| numbers.include?(value) }.size == 5
     end
   end
   nil
 end
 
 def find_winners(puzzle_input)
-  results = {winners: [], numbers_drawn: 0}
+  results = { winners: [], numbers_drawn: 0 }
   puzzle_input[0].size.times do |numbers_drawn|
     puzzle_input[1].size.times do |board_number|
-      if check_board(puzzle_input[0][0..numbers_drawn],puzzle_input[1][board_number])
-        results[:winners] << board_number unless results[:winners].include?(board_number)
+      if check_board(puzzle_input[0][0..numbers_drawn],
+                     puzzle_input[1][board_number]) && !results[:winners].include?(board_number)
+        results[:winners] << board_number
       end
       if results[:winners].size == puzzle_input[1].size
         results[:numbers_drawn] = numbers_drawn
@@ -118,8 +116,6 @@ def calculate_answer(puzzle_input)
 
   sum_unmarked_numbers(puzzle_input, results) * puzzle_input[0][results[:numbers_drawn]]
 end
-
-
 
 if __FILE__ == $0
 

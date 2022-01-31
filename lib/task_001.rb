@@ -17,17 +17,12 @@ if __FILE__ == $0
   # Consider sums of a three-measurement sliding window. How many sums are larger than the previous sum?
   # Koniec tresci. -----------------------------------------------------------------------------------
 
-
-
-
   numbers = []
 
   # File.readable? (input) do
-    File.read("input1").each_line {|line| numbers << line.to_f}
-
+  File.read('input1').each_line { |line| numbers << line.to_f }
 
   #  puts("Numbers from file: \n #{numbers}")
-
 
   a = numbers[0]
   counter = 0
@@ -35,20 +30,19 @@ if __FILE__ == $0
   puts("a.class: #{a.class}, a: #{a}")
   puts("i.class: #{counter.class}, a: #{counter}")
 
-  numbers.each {|x|  counter+=1}
+  numbers.each { |_x| counter += 1 }
   puts("All numbers count: #{counter}")
 
   counter = 0
 
   numbers.each do |x|
-    if x>a
-      counter+=1
-      a=x
+    if x > a
+      counter += 1
+      a = x
     else
-      a=x
+      a = x
     end
   end
-
 
   puts("Increased numbers caount:#{counter}")
 

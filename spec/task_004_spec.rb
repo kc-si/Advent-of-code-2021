@@ -1,6 +1,6 @@
 require './lib/task_004.rb'
 
-RSpec.describe 'metod parse_input(input_data) - input data processing:' do
+RSpec.describe 'parse_input(input_data) - input data processing:' do
   it ' short input_data to puzzle_input' do
     input_data = "7,4,9,5,11,17,23,2,0,14,21,24,10,16,13,6,15,25,12,22,18,20,8,19,3,26,1\n\n22 13 17 11  0\n
     8  2 23  4 24\n21  9 14 16  7\n 6 10  3 18  5\n 1 12 20 15 19\n\n 3 15  0  2 22\n 9 18 13 17  5\n
@@ -18,7 +18,7 @@ RSpec.describe 'metod parse_input(input_data) - input data processing:' do
   end
 end
 
-RSpec.describe 'metod check_board(numbers, board) :' do
+RSpec.describe 'check_board(numbers, board) :' do
   puzzle_input = [[7, 4, 9, 5, 11, 17, 23, 2, 0, 14, 21, 24, 10, 16, 13, 6, 15, 25, 12, 22, 18, 20, 8, 19, 3, 26, 1],
   [[[22, 13, 17, 11, 0], [8, 2, 23, 4, 24], [21, 9, 14, 16, 7], [6, 10, 3, 18, 5], [1, 12, 20, 15, 19]],
   [[3, 15, 0, 2, 22], [9, 18, 13, 17, 5], [19, 8, 7, 25, 23], [20, 11, 10, 24, 4], [14, 21, 16, 12, 6]],
@@ -43,7 +43,7 @@ RSpec.describe 'metod check_board(numbers, board) :' do
   end
 end
 
-RSpec.describe 'metod find_winners(puzzle_input) :' do
+RSpec.describe 'find_winners(puzzle_input) :' do
   puzzle_input = [[7, 4, 9, 5, 11, 17, 23, 2, 0, 14, 21, 24, 10, 16, 13, 6, 15, 25, 12, 22, 18, 20, 8, 19, 3, 26, 1],
   [[[22, 13, 17, 11, 0], [8, 2, 23, 4, 24], [21, 9, 14, 16, 7], [6, 10, 3, 18, 5], [1, 12, 20, 15, 19]],
   [[3, 15, 0, 2, 22], [9, 18, 13, 17, 5], [19, 8, 7, 25, 23], [20, 11, 10, 24, 4], [14, 21, 16, 12, 6]],
@@ -56,7 +56,7 @@ RSpec.describe 'metod find_winners(puzzle_input) :' do
   end
 end
 
-RSpec.describe ' metod sum_unmarked_numbers(puzzle_input, results) :' do
+RSpec.describe 'sum_unmarked_numbers(puzzle_input, results) :' do
   puzzle_input = [[7, 4, 9, 5, 11, 17, 23, 2, 0, 14, 21, 24, 10, 16, 13, 6, 15, 25, 12, 22, 18, 20, 8, 19, 3, 26, 1],
   [[[22, 13, 17, 11, 0], [8, 2, 23, 4, 24], [21, 9, 14, 16, 7], [6, 10, 3, 18, 5], [1, 12, 20, 15, 19]],
   [[3, 15, 0, 2, 22], [9, 18, 13, 17, 5], [19, 8, 7, 25, 23], [20, 11, 10, 24, 4], [14, 21, 16, 12, 6]],
@@ -72,7 +72,7 @@ RSpec.describe ' metod sum_unmarked_numbers(puzzle_input, results) :' do
 end
 
 
-RSpec.describe ' metod  calculate_answer(puzzle_input) :' do
+RSpec.describe 'calculate_answer(puzzle_input) :' do
   puzzle_input = [[7, 4, 9, 5, 11, 17, 23, 2, 0, 14, 21, 24, 10, 16, 13, 6, 15, 25, 12, 22, 18, 20, 8, 19, 3, 26, 1],
   [[[22, 13, 17, 11, 0], [8, 2, 23, 4, 24], [21, 9, 14, 16, 7], [6, 10, 3, 18, 5], [1, 12, 20, 15, 19]],
   [[3, 15, 0, 2, 22], [9, 18, 13, 17, 5], [19, 8, 7, 25, 23], [20, 11, 10, 24, 4], [14, 21, 16, 12, 6]],
