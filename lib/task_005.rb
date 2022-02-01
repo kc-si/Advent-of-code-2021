@@ -50,11 +50,11 @@ def parse_input(input_data)
 end
 
 def parse_line(line)
-  # points = line.split(" -> ")
+  point1, point2 = line.split(" -> ")
 
   {
-    point1: parse_point(line.split(' -> ')[0]),
-    point2: parse_point(line.split(' -> ')[1])
+    point1: parse_point(point1),
+    point2: parse_point(point2)
   }
 end
 
@@ -105,7 +105,7 @@ end
 def calculate_answer(diagram)
   i = 0
   diagram.each do |ary|
-    ary.each { |value| value >= 2 ? i += 1 : nil }
+    i += ary.count { |value| value >= 2 }#? i += 1 : nil }
   end
   i
 end

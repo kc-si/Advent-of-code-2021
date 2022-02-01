@@ -70,9 +70,9 @@ def check_board(numbers, board)
       return 1
     end
   end
-  5.times do |j|
+  board.size.times do |j|
     temp = []
-    5.times do |i|
+    board.size.times do |i|
       temp << board[i][j]
       if temp.select { |value| numbers.include?(value) }.size == 5
         return 1
