@@ -30,7 +30,7 @@ if __FILE__ == $0
   puts("a.class: #{a.class}, a: #{a}")
   puts("i.class: #{counter.class}, a: #{counter}")
 
-  numbers.each { |_x| counter += 1 }
+  numbers.each { counter += 1 }
   puts("All numbers count: #{counter}")
 
   counter = 0

@@ -21,7 +21,7 @@ RSpec.describe 'parse_input(input_data)' do
 end
 
 RSpec.describe 'parse_line(value)' do
-  it ' parses input data prcessing ( parses one line )' do
+  it ' parses input data ( parses one line )' do
     input = '0,9 -> 5,9'
 
     line = parse_line(input)
@@ -32,93 +32,62 @@ RSpec.describe 'parse_line(value)' do
   end
 end
 
-RSpec.describe 'create_diagram(lines)' do
-  it 'create diagram in array form' do
-    input =
-    [
-      { point1: [0, 1], point2: [2, 3] },
-      { point1: [1, 0], point2: [0, 4] },
-      { point1: [2, 4], point2: [3, 2] }
-    ]
-
-    diagram = create_diagram(input)
-
-    expect(diagram).to eq(
-      [
-        [0, 0, 0, 0],
-        [0, 0, 0, 0],
-        [0, 0, 0, 0],
-        [0, 0, 0, 0],
-        [0, 0, 0, 0]
-      ]
-    )
-  end
-end
-
 RSpec.describe 'mark_lines(lines, diagram)' do
   it 'marks how many horizontal or vertical lines cross over the point on diagram' do
     lines =
-    [
-      { point1: [0, 1], point2: [0, 3] },
-      { point1: [1, 0], point2: [0, 4] },
-      { point1: [0, 3], point2: [3, 3] }
-    ]
-    diagram =
-    [
-      [0, 0, 0, 0],
-      [0, 0, 0, 0],
-      [0, 0, 0, 0],
-      [0, 0, 0, 0],
-      [0, 0, 0, 0]
-    ]
+      [
+        { point1: [0, 1], point2: [0, 3] },
+        { point1: [1, 0], point2: [0, 4] },
+        { point1: [0, 3], point2: [3, 3] }
+      ]
+    diagram = {}
 
-    diagram = mark_lines(lines, diagram)
+    diagram = mark_lines(lines)
 
     expect(diagram).to eq(
-        [
-          [0, 0, 0, 0],
-          [1, 0, 0, 0],
-          [1, 0, 0, 0],
-          [2, 1, 1, 1],
-          [0, 0, 0, 0]
-        ]
-      )
+      {
+        '0,1' => 1,
+        '0,2' => 1,
+        '0,3' => 2,
+        '1,3' => 1,
+        '2,3' => 1,
+        '3,3' => 1
+      }
+    )
   end
 end
 
 RSpec.describe 'mark_line(line, diagram)' do
   it 'mark 1 line on diagram' do
     line = { point1: [0, 3], point2: [3, 3] }
-    diagram =
-    [
-      [0, 0, 0, 0],
-      [0, 0, 0, 0],
-      [0, 0, 0, 0],
-      [0, 0, 0, 0],
-      [0, 0, 0, 0]
-    ]
+    diagram = {}
 
     diagram = mark_line(line, diagram)
 
     expect(diagram).to eq(
-        [
-          [0, 0, 0, 0],
-          [0, 0, 0, 0],
-          [0, 0, 0, 0],
-          [1, 1, 1, 1],
-          [0, 0, 0, 0]
-        ]
-      )
+      {
+        '0,3' => 1,
+        '1,3' => 1,
+        '2,3' => 1,
+        '3,3' => 1
+      }
+    )
   end
 end
 
-RSpec.describe 'line_range(value1, value2)' do
-  it 'returns line range' do
-    value1 = 0
-    value2 = 3
+RSpec.describe 'calculate_answer(diagram)' do
+  it 'it calculate how many values of diagram hash are greater than 2' do
+    diagram = {
+      '0,1' => 1,
+      '0,2' => 4,
+      '0,3' => 2,
+      '1,3' => 1,
+      '2,3' => 1,
+      '3,3' => 3
+    }
 
-    range = line_range(value1, value2)
+    answer = calculate_answer(diagram)
 
-    expect(range).to eq([0, 3])
+    expect(answer).to eq(3)
   end
 end
