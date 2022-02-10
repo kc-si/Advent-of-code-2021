@@ -75,7 +75,6 @@ def mark_lines(lines)
 end
 
 def mark_line(line, diagram)
-
   if line[:point1][0] == line[:point2][0] || line[:point1][1] == line[:point2][1]
     x1, x2 = [line[:point1][0], line[:point2][0]].sort
     y1, y2 = [line[:point1][1], line[:point2][1]].sort
