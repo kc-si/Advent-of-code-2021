@@ -8,7 +8,7 @@ RSpec.describe 'parse_input(input_data)' do
       9,4 -> 3,4
     INPUT
 
-    lines = parse_input(input)
+    lines = Task005a.parse_input(input)
 
     expect(lines).to eq(
       [
@@ -24,7 +24,7 @@ RSpec.describe 'parse_line(value)' do
   it ' parses input data prcessing ( parses one line )' do
     input = '0,9 -> 5,9'
 
-    line = parse_line(input)
+    line = Task005a.parse_line(input)
 
     expect(line).to eq(
       { point1: [0, 9], point2: [5, 9] },
@@ -43,7 +43,7 @@ RSpec.describe 'mark_lines(lines, diagram)' do
         { point1: [0, 2], point2: [3, 3] },
       ]
 
-    diagram = mark_lines(lines)
+    diagram = Task005a.mark_lines(lines)
 
     expect(diagram).to eq(
       {
@@ -67,7 +67,7 @@ RSpec.describe 'mark_line(line, diagram)' do
     line = { point1: [6, 8], point2: [8, 6] }
     diagram = {}
 
-    diagram = mark_line(line, diagram)
+    diagram = Task005a.mark_line(line, diagram)
 
     expect(diagram).to eq(
       {
@@ -90,7 +90,7 @@ RSpec.describe 'calculate_answer(diagram)' do
       [3, 3] => 3,
     }
 
-    answer = calculate_answer(diagram)
+    answer = Task005a.calculate_answer(diagram)
 
     expect(answer).to eq(3)
   end

@@ -4,7 +4,7 @@ RSpec.describe 'parse_input(input_data) - input data processing:' do
   it ' short input_data to binary_diagnostic_report' do
     input_data = "100000101101\n011011010101\n000000111000\n110101110111\n110000001100\n"
 
-    binary_diagnostic_report = parse_input(input_data)
+    binary_diagnostic_report = Task003a.parse_input(input_data)
 
     expect(binary_diagnostic_report).to eq([['1', '0', '0', '0', '0', '0', '1', '0', '1', '1', '0', '1'],
       ['0', '1', '1', '0', '1', '1', '0', '1', '0', '1', '0', '1'],
@@ -19,7 +19,7 @@ RSpec.describe 'bit_criteria - calculate one output number by bit criteria:' do 
     binary_diagnostic_report = [['']]
     common = ''
 
-    binary_report = bit_criteria(binary_diagnostic_report, common)
+    binary_report = Task003a.bit_criteria(binary_diagnostic_report, common)
 
     expect(binary_report).to eq('')
   end
@@ -28,7 +28,7 @@ RSpec.describe 'bit_criteria - calculate one output number by bit criteria:' do 
     binary_diagnostic_report = [['']]
     common = 'most'
 
-    binary_report = bit_criteria(binary_diagnostic_report, common)
+    binary_report = Task003a.bit_criteria(binary_diagnostic_report, common)
 
     expect(binary_report).to eq('')
   end
@@ -37,7 +37,7 @@ RSpec.describe 'bit_criteria - calculate one output number by bit criteria:' do 
     binary_diagnostic_report = [['1', '0', '0', '0', '0', '0', '1', '0', '1', '1', '0', '1']]
     common = 'most'
 
-    binary_report = bit_criteria(binary_diagnostic_report, common)
+    binary_report = Task003a.bit_criteria(binary_diagnostic_report, common)
 
     expect(binary_report).to eq('100000101101')
   end
@@ -47,7 +47,7 @@ RSpec.describe 'bit_criteria - calculate one output number by bit criteria:' do 
       ['0', '1', '1', '0', '1', '1', '0', '1', '0', '1', '0', '1']]
     common = 'most'
 
-    binary_report = bit_criteria(binary_diagnostic_report, common)
+    binary_report = Task003a.bit_criteria(binary_diagnostic_report, common)
 
     expect(binary_report).to eq('100000101101')
   end
@@ -65,7 +65,7 @@ RSpec.describe 'bit_criteria - calculate one output number by bit criteria:' do 
       ['1', '0', '0', '0', '0', '0', '0', '1', '0', '0', '1', '1']]
     common = 'most'
 
-    binary_report = bit_criteria(binary_diagnostic_report, common)
+    binary_report = Task003a.bit_criteria(binary_diagnostic_report, common)
 
     expect(binary_report).to eq('100000101101')
   end
@@ -74,7 +74,7 @@ RSpec.describe 'bit_criteria - calculate one output number by bit criteria:' do 
     binary_diagnostic_report = [['1', '0'], ['0', '1'], ['0', '0'], ['1', '1'], ['0', '1']]
     common = 'most'
 
-    binary_report = bit_criteria(binary_diagnostic_report, common)
+    binary_report = Task003a.bit_criteria(binary_diagnostic_report, common)
 
     expect(binary_report).to eq('01')
   end
@@ -87,7 +87,7 @@ RSpec.describe 'bit_criteria - calculate one output number by bit criteria:' do 
       ['0', '1', '0', '1', '1', '1', '0', '0', '0', '0', '1', '1']]
     common = 'most'
 
-    binary_report = bit_criteria(binary_diagnostic_report, common)
+    binary_report = Task003a.bit_criteria(binary_diagnostic_report, common)
 
     expect(binary_report).to eq('01101101')
   end
@@ -105,7 +105,7 @@ RSpec.describe 'bit_criteria - calculate one output number by bit criteria:' do 
       ['1', '0', '0', '0', '0', '0', '0', '1', '0', '0', '1', '1']]
     common = 'least'
 
-    binary_report = bit_criteria(binary_diagnostic_report, common)
+    binary_report = Task003a.bit_criteria(binary_diagnostic_report, common)
 
     expect(binary_report).to eq('000000111000')
   end
@@ -114,7 +114,7 @@ RSpec.describe 'bit_criteria - calculate one output number by bit criteria:' do 
     binary_diagnostic_report = [['1', '0'], ['0', '1'], ['0', '0'], ['1', '1'], ['0', '1']]
     common = 'least'
 
-    binary_report = bit_criteria(binary_diagnostic_report, common)
+    binary_report = Task003a.bit_criteria(binary_diagnostic_report, common)
 
     expect(binary_report).to eq('10')
   end
@@ -127,7 +127,7 @@ RSpec.describe 'bit_criteria - calculate one output number by bit criteria:' do 
       ['0', '1', '0', '1', '1', '1', '0', '0', '0', '0', '1', '1']]
     common = 'least'
 
-    binary_report = bit_criteria(binary_diagnostic_report, common)
+    binary_report = Task003a.bit_criteria(binary_diagnostic_report, common)
 
     expect(binary_report).to eq('100000101101')
   end
@@ -138,7 +138,7 @@ RSpec.describe 'calculate_life_support_rating(input_data):' do # RSpec. not necc
     input_data = <<~INPUT
     INPUT
 
-    life_support_rating = calculate_life_support_rating(input_data)
+    life_support_rating = Task003a.calculate_life_support_rating(input_data)
 
     expect(life_support_rating).to eq(0)
   end
@@ -148,7 +148,7 @@ RSpec.describe 'calculate_life_support_rating(input_data):' do # RSpec. not necc
       100000101101
     INPUT
 
-    life_support_rating = calculate_life_support_rating(input_data)
+    life_support_rating = Task003a.calculate_life_support_rating(input_data)
 
     expect(life_support_rating).to eq(4_380_649)
   end
@@ -159,7 +159,7 @@ RSpec.describe 'calculate_life_support_rating(input_data):' do # RSpec. not necc
       011011010101
     INPUT
 
-    life_support_rating = calculate_life_support_rating(input_data)
+    life_support_rating = Task003a.calculate_life_support_rating(input_data)
 
     expect(life_support_rating).to eq(3_660_657)
   end
@@ -173,7 +173,7 @@ RSpec.describe 'calculate_life_support_rating(input_data):' do # RSpec. not necc
       110000001100
     INPUT
 
-    life_support_rating = calculate_life_support_rating(input_data)
+    life_support_rating = Task003a.calculate_life_support_rating(input_data)
 
     expect(life_support_rating).to eq(193_032)
   end
@@ -202,7 +202,7 @@ RSpec.describe 'calculate_life_support_rating(input_data):' do # RSpec. not necc
       111100110001
     INPUT
 
-    life_support_rating = calculate_life_support_rating(input_data)
+    life_support_rating = Task003a.calculate_life_support_rating(input_data)
 
     expect(life_support_rating).to eq(118_048)
   end

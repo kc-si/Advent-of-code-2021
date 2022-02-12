@@ -45,55 +45,59 @@ require_relative 'read_file'
 #
 # Consider only horizontal and vertical lines. At how many points do at least two lines overlap?
 
-def parse_input(input_data)
-  input_data.split("\n").map { |line| parse_line(line) }
-end
+module Task005
+  module_function
 
-def parse_line(line)
-  point1, point2 = line.split(' -> ')
+  def parse_input(input_data)
+    input_data.split("\n").map { |line| parse_line(line) }
+  end
 
-  {
-    point1: parse_point(point1),
-    point2: parse_point(point2),
-  }
-end
+  def parse_line(line)
+    point1, point2 = line.split(' -> ')
 
-def parse_point(point)
-  point.split(',').map { |value| value.to_i }
-end
+    {
+      point1: parse_point(point1),
+      point2: parse_point(point2),
+    }
+  end
 
-def mark_lines(lines)
-  diagram = {}
-  lines.each { |line| mark_line(line, diagram) }
-  diagram
-end
+  def parse_point(point)
+    point.split(',').map { |value| value.to_i }
+  end
 
-def mark_line(line, diagram)
-  if line[:point1][0] == line[:point2][0] || line[:point1][1] == line[:point2][1]
-    x1, x2 = [line[:point1][0], line[:point2][0]].sort
-    y1, y2 = [line[:point1][1], line[:point2][1]].sort
-    (x1..x2).each do |x|
-      (y1..y2).each do |y|
-        diagram.key?([x, y]) ? diagram[[x, y]] += 1 : diagram.store([x, y], 1)
+  def mark_lines(lines)
+    diagram = {}
+    lines.each { |line| mark_line(line, diagram) }
+    diagram
+  end
+
+  def mark_line(line, diagram)
+    if line[:point1][0] == line[:point2][0] || line[:point1][1] == line[:point2][1]
+      x1, x2 = [line[:point1][0], line[:point2][0]].sort
+      y1, y2 = [line[:point1][1], line[:point2][1]].sort
+      (x1..x2).each do |x|
+        (y1..y2).each do |y|
+          diagram.key?([x, y]) ? diagram[[x, y]] += 1 : diagram.store([x, y], 1)
+        end
       end
     end
+    diagram
   end
-  diagram
-end
 
-def calculate_answer(diagram)
-  diagram.count { |key, value| value >= 2 }
+  def calculate_answer(diagram)
+    diagram.count { |_key, value| value >= 2 }
+  end
 end
 
 if __FILE__ == $0
 
-  input_data = read_file
+  input_data = Task005.read_file
   return if input_data.nil?
 
-  lines = parse_input(input_data)
+  lines = Task005.parse_input(input_data)
 
-  diagram = mark_lines(lines)
+  diagram = Task005.mark_lines(lines)
 
-  answer = calculate_answer(diagram)
+  answer = Task005.calculate_answer(diagram)
   puts("Answer: #{answer}")
 end
