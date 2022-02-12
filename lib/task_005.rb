@@ -54,7 +54,7 @@ def parse_line(line)
 
   {
     point1: parse_point(point1),
-    point2: parse_point(point2)
+    point2: parse_point(point2),
   }
 end
 
@@ -78,7 +78,7 @@ def mark_line(line, diagram)
       end
     end
   end
-diagram
+  diagram
 end
 
 def calculate_answer(diagram)

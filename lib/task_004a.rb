@@ -1,4 +1,4 @@
-require_relative './read_file.rb'
+require_relative 'read_file'
 
 # The submarine has a bingo subsystem to help passengers (currently, you and the giant squid) pass the time.
 #  It automatically generates a random order in which to draw numbers and a
@@ -66,7 +66,7 @@ require_relative './read_file.rb'
 
 def parse_input(input_data)
   [input_data.split[0].split(',').map { |variable| variable.to_i }].concat(
-    [input_data.split[1...nil].map { |variable| variable.to_i }.each_slice(5).to_a.each_slice(5).to_a]
+    [input_data.split[1...nil].map { |variable| variable.to_i }.each_slice(5).to_a.each_slice(5).to_a],
   )
 end
 
@@ -89,7 +89,7 @@ def find_winners(puzzle_input)
   puzzle_input[0].size.times do |numbers_drawn|
     puzzle_input[1].size.times do |board_number|
       if check_board(puzzle_input[0][0..numbers_drawn],
-                     puzzle_input[1][board_number]) && !results[:winners].include?(board_number)
+        puzzle_input[1][board_number]) && !results[:winners].include?(board_number)
         results[:winners] << board_number
       end
       if results[:winners].size == puzzle_input[1].size

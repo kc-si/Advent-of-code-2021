@@ -1,4 +1,4 @@
-require_relative './read_file.rb'
+require_relative 'read_file'
 
 # The submarine has a bingo subsystem to help passengers (currently, you and the giant squid) pass the time.
 #  It automatically generates a random order in which to draw numbers and a
@@ -60,8 +60,9 @@ require_relative './read_file.rb'
 # final score be if you choose that board?
 
 def parse_input(input_data)
-  [input_data.split[0].split(',').map{ |variable| variable.to_i }].concat(
-    [input_data.split[1...nil].map{ |variable| variable.to_i }.each_slice(5).to_a.each_slice(5).to_a])
+  [input_data.split[0].split(',').map { |variable| variable.to_i }].concat(
+    [input_data.split[1...nil].map { |variable| variable.to_i }.each_slice(5).to_a.each_slice(5).to_a],
+  )
 end
 
 def check_board(numbers, board)
@@ -83,10 +84,10 @@ def check_board(numbers, board)
 end
 
 def find_winners(puzzle_input)
-  results = {winners: [], numbers_drawn: 0}
+  results = { winners: [], numbers_drawn: 0 }
   puzzle_input[0].size.times do |numbers_drawn|
     puzzle_input[1].size.times do |board_number|
-      results[:winners] << board_number if check_board(puzzle_input[0][0..numbers_drawn],puzzle_input[1][board_number])
+      results[:winners] << board_number if check_board(puzzle_input[0][0..numbers_drawn], puzzle_input[1][board_number])
       if results[:winners].size >= 1
         results[:numbers_drawn] = numbers_drawn
         return results
@@ -115,8 +116,6 @@ def calculate_answer(puzzle_input)
     sum_unmarked_numbers(puzzle_input, results) * puzzle_input[0][results[:numbers_drawn]]
   end
 end
-
-
 
 if __FILE__ == $0
 

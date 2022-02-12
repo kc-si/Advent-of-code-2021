@@ -1,5 +1,5 @@
 require_relative 'read_file'
-require 'debug'
+
 # They tend to form in lines; the submarine helpfully produces a list of nearby lines of vents (your puzzle input)
 # for you to review. For example:
 #
@@ -60,7 +60,7 @@ def parse_line(line)
 
   {
     point1: parse_point(point1),
-    point2: parse_point(point2)
+    point2: parse_point(point2),
   }
 end
 
@@ -89,14 +89,14 @@ def mark_line(line, diagram)
     x1, x2 = [line[:point1][0], line[:point2][0]].sort
     y1, y2 = [line[:point1][1], line[:point2][1]].sort
 
-    line[:point1][0] - line[:point2][0] < 0 ? x = (x1..x2).each.to_a : x = (x1..x2).each.to_a.reverse
-    line[:point1][1] - line[:point2][1] < 0 ? y = (y1..y2).each.to_a : y = (y1..y2).each.to_a.reverse
+    x = line[:point1][0] - line[:point2][0] < 0 ? (x1..x2).each.to_a : (x1..x2).each.to_a.reverse
+    y = line[:point1][1] - line[:point2][1] < 0 ? (y1..y2).each.to_a : (y1..y2).each.to_a.reverse
 
     x.size.times do |i|
       diagram.key?("#{x[i]},#{y[i]}") ? diagram["#{x[i]},#{y[i]}"] += 1 : diagram.store("#{x[i]},#{y[i]}", 1)
     end
   end
-diagram
+  diagram
 end
 
 def calculate_answer(diagram)

@@ -14,8 +14,8 @@ RSpec.describe 'parse_input(input_data)' do
       [
         { point1: [0, 9], point2: [5, 9] },
         { point1: [8, 0], point2: [0, 8] },
-        { point1: [9, 4], point2: [3, 4] }
-      ]
+        { point1: [9, 4], point2: [3, 4] },
+      ],
     )
   end
 end
@@ -27,7 +27,7 @@ RSpec.describe 'parse_line(value)' do
     line = parse_line(input)
 
     expect(line).to eq(
-      { point1: [0, 9], point2: [5, 9] }
+      { point1: [0, 9], point2: [5, 9] },
     )
   end
 end
@@ -38,7 +38,7 @@ RSpec.describe 'mark_lines(lines, diagram)' do
       [
         { point1: [0, 1], point2: [0, 3] },
         { point1: [1, 0], point2: [0, 4] },
-        { point1: [0, 3], point2: [3, 3] }
+        { point1: [0, 3], point2: [3, 3] },
       ]
     diagram = {}
 
@@ -51,8 +51,8 @@ RSpec.describe 'mark_lines(lines, diagram)' do
         '0,3' => 2,
         '1,3' => 1,
         '2,3' => 1,
-        '3,3' => 1
-      }
+        '3,3' => 1,
+      },
     )
   end
 end
@@ -69,8 +69,8 @@ RSpec.describe 'mark_line(line, diagram)' do
         '0,3' => 1,
         '1,3' => 1,
         '2,3' => 1,
-        '3,3' => 1
-      }
+        '3,3' => 1,
+      },
     )
   end
 end
@@ -83,7 +83,7 @@ RSpec.describe 'calculate_answer(diagram)' do
       '0,3' => 2,
       '1,3' => 1,
       '2,3' => 1,
-      '3,3' => 3
+      '3,3' => 3,
     }
 
     answer = calculate_answer(diagram)

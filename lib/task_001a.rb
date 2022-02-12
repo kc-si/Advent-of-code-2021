@@ -39,29 +39,28 @@ if __FILE__ == $0
   # Consider sums of a three-measurement sliding window. How many sums are larger than the previous sum?
   # ----------------------------------------------------------------
 
-
   i = 0
-  while i<5 do
-      puts(' Type filename with extension if exist (or type EXIT if you want to quit) end press ENTER :')
-      in_file = gets
-      in_file = in_file.chop
+  while i < 5
+    puts(' Type filename with extension if exist (or type EXIT if you want to quit) end press ENTER :')
+    in_file = gets
+    in_file = in_file.chop
 
-      break if in_file == "exit"
+    break if in_file == 'exit'
 
-      numbers = []
+    numbers = []
 
-      if File.readable? (in_file)
-        File.read(in_file).each_line {|line| numbers << line.to_f}
-        break
-      else
-          puts('Wrong filename or file not exist. Try again.')
-          i += 1
-          next
-      end
+    if File.readable?(in_file)
+      File.read(in_file).each_line { |line| numbers << line.to_f }
+      break
+    else
+      puts('Wrong filename or file not exist. Try again.')
+      i += 1
+      next
+    end
 
   end
 
-  if in_file != "exit" and File.readable? (in_file) then
+  if in_file != 'exit' and File.readable?(in_file)
 
     puts("The number of all measurements: #{numbers.count}")
 
@@ -74,7 +73,7 @@ if __FILE__ == $0
     last_left_window_beginning = numbers.count - WINDOWSIZE - 1
 
     (0..last_left_window_beginning).each do |left_window_beginning|
-      if numbers[left_window_beginning] < numbers[left_window_beginning+WINDOWSIZE]
+      if numbers[left_window_beginning] < numbers[left_window_beginning + WINDOWSIZE]
         counter += 1
       end
     end
