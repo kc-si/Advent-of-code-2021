@@ -19,9 +19,10 @@
 
 You can just download repository, install gem libraries: To install go to main of this repository and run from command line:
 
-bundle install
+  bundle install
 
-Now go to ./lib and run each scripts from command line, exmaple :
+Now go to **<em> ./lib </em>** and run each scripts from command line,  exmaple :
+
 
   ruby task_002.rb
 
