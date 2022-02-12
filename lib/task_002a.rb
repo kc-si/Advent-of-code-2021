@@ -1,4 +1,4 @@
-require "./lib/read_file.rb"
+require_relative './read_file'
 
 # Task:
 #   In addition to horizontal position and depth, you'll also need to track a third value, aim, which also starts at 0. The commands also mean something entirely different than you first thought:
@@ -41,9 +41,9 @@ def parse_input(input_data)
   lines = input_data.split("\n")
 
   lines.each do |line|
-    direction = line.split(" ")[0].to_sym
-    distance = line.split(" ")[1].to_f
-    steps << {direction: direction, distance: distance}
+    direction = line.split(' ')[0].to_sym
+    distance = line.split(' ')[1].to_f
+    steps << { direction:, distance: }
   end
   steps
 end
@@ -53,17 +53,17 @@ def count_position(initial_position, steps)
 
   steps.each do |step|
     case step[:direction]
-    when :forward
-      position[:horizontal] += step[:distance]
-      position[:depth] += (position[:aim] * step[:distance])
-    when :down then position[:aim] += step[:distance]
-    when :up then position[:aim] -= step[:distance]
+      when :forward
+        position[:horizontal] += step[:distance]
+        position[:depth] += (position[:aim] * step[:distance])
+      when :down then position[:aim] += step[:distance]
+      when :up then position[:aim] -= step[:distance]
     end
   end
   position
 end
 
-def calculate_answer(input_data, initial_position = {horizontal: 0, depth: 0, aim: 0})
+def calculate_answer(input_data, initial_position = { horizontal: 0, depth: 0, aim: 0 })
   steps = parse_input(input_data)
   final_position = count_position(initial_position, steps)
   final_position[:horizontal] * final_position[:depth]
@@ -76,6 +76,6 @@ if __FILE__ == $0
   input_data = read_file
   return if input_data.nil?
 
-  answer = calculate_answer(input_data)  # initial_position = {horizontal: 0, depth: 0, aim: 0}
+  answer = calculate_answer(input_data) # initial_position = {horizontal: 0, depth: 0, aim: 0}
   puts("Multiply horizontal and depth : #{answer} ")
 end

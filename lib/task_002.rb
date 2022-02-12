@@ -1,4 +1,3 @@
-
 # Task:
 #
 #
@@ -29,9 +28,9 @@ def read_file
   input_file = gets
   input_file = input_file.chop
 
-  return if input_file == "exit"
+  return if input_file == 'exit'
 
-  if File.readable? (input_file)
+  if File.readable?(input_file)
     input_data = File.read(input_file)
   else
     puts('Wrong filename or file not exist.')
@@ -44,10 +43,10 @@ def parse_input(input_data)
   lines = input_data.split("\n")
 
   lines.each do |line|
-    direction = line.split(" ")[0].to_sym
-    distance = line.split(" ")[1].to_i
+    direction = line.split(' ')[0].to_sym
+    distance = line.split(' ')[1].to_i
 
-    steps << {direction: direction, distance: distance}
+    steps << { direction:, distance: }
   end
 
   steps
@@ -58,16 +57,16 @@ def calculate_position(initial_position, steps)
 
   steps.each do |step|
     case step[:direction]
-    when :forward then  position[:horizontal] += step[:distance]
-    when :down then     position[:depth] += step[:distance]
-    when :up then       position[:depth] -= step[:distance]
+      when :forward then position[:horizontal] += step[:distance]
+      when :down then position[:depth] += step[:distance]
+      when :up then position[:depth] -= step[:distance]
     end
   end
 
   position
 end
 
-def calculate_answer(input_data, initial_position = {horizontal: 0, depth: 0})
+def calculate_answer(input_data, initial_position = { horizontal: 0, depth: 0 })
   steps = parse_input(input_data)
   final_position = calculate_position(initial_position, steps)
   final_position[:horizontal] * final_position[:depth]

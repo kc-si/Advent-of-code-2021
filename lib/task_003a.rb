@@ -1,4 +1,4 @@
-require './lib/read_file'
+require_relative './read_file'
 
 # Task
 # Next, you should verify the life support rating, which can be determined by multiplying the oxygen generator rating
@@ -58,8 +58,8 @@ def find_common(binary_diagnostic_report, bit_position)
 
   binary_diagnostic_report.each do |value|
     case value[bit_position].to_i
-    when 1 then most_common += 1
-    when 0 then most_common -= 1
+      when 1 then most_common += 1
+      when 0 then most_common -= 1
     end
   end
   if most_common >= 0
@@ -77,8 +77,12 @@ def bit_criteria(binary_diagnostic_report, common)
       most_common = find_common(binary_diagnostic_report, bit_position)
 
       binary_diagnostic_report = case common
-      when 'most' then  binary_diagnostic_report.select { |value| value[bit_position] == most_common }
-      when 'least' then binary_diagnostic_report.reject { |value| value[bit_position] == most_common }
+        when 'most' then binary_diagnostic_report.select do |value|
+          value[bit_position] == most_common
+        end
+        when 'least' then binary_diagnostic_report.reject do |value|
+          value[bit_position] == most_common
+        end
       end
 
       bit_position += 1

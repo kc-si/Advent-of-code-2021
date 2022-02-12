@@ -1,4 +1,4 @@
-require "./lib/read_file.rb"
+require_relative './read_file'
 
 # Task:
 #
@@ -44,8 +44,8 @@ def parse_input(input_data)
 end
 
 def count_gamma_epsilon_rate(binary_diagnostic_report)
-  gamma_rate = ""
-  epsilon_rate = ""
+  gamma_rate = ''
+  epsilon_rate = ''
 
   rate = 0
   bit_position = 0
@@ -53,23 +53,23 @@ def count_gamma_epsilon_rate(binary_diagnostic_report)
   binary_diagnostic_report[0].size.times do
     binary_diagnostic_report.each do |value|
       case value[bit_position].to_i
-      when 1 then rate += 1
-      when 0 then rate -= 1
+        when 1 then rate += 1
+        when 0 then rate -= 1
       end
     end
 
     if rate <= 0
-      gamma_rate << "0"
-      epsilon_rate << "1"
+      gamma_rate << '0'
+      epsilon_rate << '1'
     else
-      gamma_rate << "1"
-      epsilon_rate << "0"
+      gamma_rate << '1'
+      epsilon_rate << '0'
     end
 
     rate = 0
     bit_position += 1
   end
-  rates = {gamma_rate: gamma_rate, epsilon_rate: epsilon_rate}
+  rates = { gamma_rate:, epsilon_rate: }
 end
 
 def calculate_power_consumption(input_data)
