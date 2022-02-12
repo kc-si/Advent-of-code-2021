@@ -102,7 +102,9 @@ module Task005a
     diagram
   end
 
-  def calculate_answer(diagram)
+  def calculate_answer(input_data)
+    lines = parse_input(input_data)
+    diagram = mark_lines(lines)
     diagram.count { |_key, value| value >= 2 }
   end
 end
@@ -112,10 +114,7 @@ if __FILE__ == $0
   input_data = Task005a.read_file
   return if input_data.nil?
 
-  lines = Task005a.parse_input(input_data)
+  answer = Task005a.calculate_answer(input_data)
 
-  diagram = Task005a.mark_lines(lines)
-
-  answer = Task005a.calculate_answer(diagram)
   puts("Answer: #{answer}")
 end
