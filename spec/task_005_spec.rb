@@ -46,12 +46,12 @@ RSpec.describe 'mark_lines(lines, diagram)' do
 
     expect(diagram).to eq(
       {
-        '0,1' => 1,
-        '0,2' => 1,
-        '0,3' => 2,
-        '1,3' => 1,
-        '2,3' => 1,
-        '3,3' => 1,
+        [0, 1] => 1,
+        [0, 2] => 1,
+        [0, 3] => 2,
+        [1, 3] => 1,
+        [2, 3] => 1,
+        [3, 3] => 1,
       },
     )
   end
@@ -66,10 +66,10 @@ RSpec.describe 'mark_line(line, diagram)' do
 
     expect(diagram).to eq(
       {
-        '0,3' => 1,
-        '1,3' => 1,
-        '2,3' => 1,
-        '3,3' => 1,
+        [0, 3] => 1,
+        [1, 3] => 1,
+        [2, 3] => 1,
+        [3, 3] => 1,
       },
     )
   end
@@ -78,12 +78,12 @@ end
 RSpec.describe 'calculate_answer(diagram)' do
   it 'it calculate how many values of diagram hash are greater than 2' do
     diagram = {
-      '0,1' => 1,
-      '0,2' => 4,
-      '0,3' => 2,
-      '1,3' => 1,
-      '2,3' => 1,
-      '3,3' => 3,
+      [0, 1] => 1,
+      [0, 2] => 4,
+      [0, 3] => 2,
+      [1, 3] => 1,
+      [2, 3] => 1,
+      [3, 3] => 3,
     }
 
     answer = calculate_answer(diagram)

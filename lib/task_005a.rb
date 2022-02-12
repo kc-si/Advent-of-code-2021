@@ -80,7 +80,7 @@ def mark_line(line, diagram)
     y1, y2 = [line[:point1][1], line[:point2][1]].sort
     (x1..x2).each do |x|
       (y1..y2).each do |y|
-        diagram.key?("#{x},#{y}") ? diagram["#{x},#{y}"] += 1 : diagram.store("#{x},#{y}", 1)
+        diagram.key?([x, y]) ? diagram[[x, y]] += 1 : diagram.store([x, y], 1)
       end
     end
   end
@@ -93,16 +93,14 @@ def mark_line(line, diagram)
     y = line[:point1][1] - line[:point2][1] < 0 ? (y1..y2).each.to_a : (y1..y2).each.to_a.reverse
 
     x.size.times do |i|
-      diagram.key?("#{x[i]},#{y[i]}") ? diagram["#{x[i]},#{y[i]}"] += 1 : diagram.store("#{x[i]},#{y[i]}", 1)
+      diagram.key?([x[i], y[i]]) ? diagram[[x[i], y[i]]] += 1 : diagram.store([x[i], y[i]], 1)
     end
   end
   diagram
 end
 
 def calculate_answer(diagram)
-  sum = 0
-  diagram.each_value { |value| value >= 2 ? sum += 1 : nil }
-  sum
+  diagram.count { |key, value| value >= 2 }
 end
 
 if __FILE__ == $0
