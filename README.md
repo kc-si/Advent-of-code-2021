@@ -17,15 +17,18 @@
 
 ## Installation:
 
-You can just download repository, go to **<em> ./lib </em>** and run each scripts from command line,  exmaple :
+You can just download repository, install gem libraries: To install go to main of this repository and run from command line:
 
-      ruby task_002.rb
+bundle install
 
-   > then scripts ask you for input data file name : **<em> input2 </em>**  for this task
+Now go to ./lib and run each scripts from command line, exmaple :
 
-   or starting from day 3 task you can use form:
+  ruby task_002.rb
 
-      ruby task_003.rb input3
+    then scripts ask you for input data file name : input2 for this task
 
-   where input3 is a name of input data file.
+or starting from day 3 task you can use form:
 
+  ruby task_003.rb input3
+
+where input3 is a name of input data file.
