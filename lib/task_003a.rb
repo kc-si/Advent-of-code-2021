@@ -49,75 +49,79 @@ require_relative './read_file'
 # then multiply them together. What is the life support rating of the submarine? (Be sure to represent your
 # answer in decimal, not binary.)
 
-def parse_input(input_data)
-  input_data.split.map { |binary_value| binary_value.chars }
-end
+module Task003a
+  module_function
 
-def find_common(binary_diagnostic_report, bit_position)
-  most_common = 0
-
-  binary_diagnostic_report.each do |value|
-    case value[bit_position].to_i
-      when 1 then most_common += 1
-      when 0 then most_common -= 1
-    end
+  def parse_input(input_data)
+    input_data.split.map { |binary_value| binary_value.chars }
   end
-  if most_common >= 0
-    '1'
-  else
-    '0'
-  end
-end
 
-def bit_criteria(binary_diagnostic_report, common)
-  if binary_diagnostic_report.size >= 1
-    binary_diagnostic_report[0].size.times do |bit_position|
-      break if binary_diagnostic_report.size == 1
+  def find_common(binary_diagnostic_report, bit_position)
+    most_common = 0
 
-      most_common = find_common(binary_diagnostic_report, bit_position)
-
-      binary_diagnostic_report = case common
-        when 'most' then binary_diagnostic_report.select do |value|
-          value[bit_position] == most_common
-        end
-        when 'least' then binary_diagnostic_report.reject do |value|
-          value[bit_position] == most_common
-        end
+    binary_diagnostic_report.each do |value|
+      case value[bit_position].to_i
+        when 1 then most_common += 1
+        when 0 then most_common -= 1
       end
-
-      bit_position += 1
     end
-  else
-    binary_diagnostic_report = [['0']]
+    if most_common >= 0
+      '1'
+    else
+      '0'
+    end
   end
-  binary_diagnostic_report[0].join
-end
 
-def calculate_rating(binary_diagnostic_report)
-  rating = { oxygen_generator_rating: 0, co2_scrubber_rating: 0 }
+  def bit_criteria(binary_diagnostic_report, common)
+    if binary_diagnostic_report.size >= 1
+      binary_diagnostic_report[0].size.times do |bit_position|
+        break if binary_diagnostic_report.size == 1
 
-  rating[:oxygen_generator_rating] = bit_criteria(binary_diagnostic_report, 'most')
-  rating[:co2_scrubber_rating] = bit_criteria(binary_diagnostic_report, 'least')
+        most_common = find_common(binary_diagnostic_report, bit_position)
 
-  rating
-end
+        binary_diagnostic_report = case common
+                                     when 'most' then binary_diagnostic_report.select do |value|
+                                                        value[bit_position] == most_common
+                                                      end
+                                     when 'least' then binary_diagnostic_report.reject do |value|
+                                                         value[bit_position] == most_common
+                                                       end
+                                   end
 
-def calculate_life_support_rating(input_data)
-  binary_diagnostic_report = parse_input(input_data)
+        bit_position += 1
+      end
+    else
+      binary_diagnostic_report = [['0']]
+    end
+    binary_diagnostic_report[0].join
+  end
 
-  rating = calculate_rating(binary_diagnostic_report)
+  def calculate_rating(binary_diagnostic_report)
+    rating = { oxygen_generator_rating: 0, co2_scrubber_rating: 0 }
 
-  rating[:oxygen_generator_rating].to_i(2) * rating[:co2_scrubber_rating].to_i(2)
+    rating[:oxygen_generator_rating] = bit_criteria(binary_diagnostic_report, 'most')
+    rating[:co2_scrubber_rating] = bit_criteria(binary_diagnostic_report, 'least')
+
+    rating
+  end
+
+  def calculate_life_support_rating(input_data)
+    binary_diagnostic_report = parse_input(input_data)
+
+    rating = calculate_rating(binary_diagnostic_report)
+
+    rating[:oxygen_generator_rating].to_i(2) * rating[:co2_scrubber_rating].to_i(2)
+  end
 end
 
 if __FILE__ == $0
 
   #  main
 
-  input_data = read_file
+  input_data = Task003a.read_file
   return if input_data.nil?
 
-  answer = calculate_life_support_rating(input_data)
+  answer = Task003a.calculate_life_support_rating(input_data)
   puts("Answer : #{answer} ")
 
 end

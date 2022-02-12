@@ -51,67 +51,71 @@ require_relative 'read_file'
 # Because of the limits of the hydrothermal vent mapping system, the lines in your list will only
 # ever be horizontal, vertical, or a diagonal line at exactly 45 degrees.
 
-def parse_input(input_data)
-  input_data.split("\n").map { |line| parse_line(line) }
-end
+module Task005a
+  module_function
 
-def parse_line(line)
-  point1, point2 = line.split(' -> ')
+  def parse_input(input_data)
+    input_data.split("\n").map { |line| parse_line(line) }
+  end
 
-  {
-    point1: parse_point(point1),
-    point2: parse_point(point2),
-  }
-end
+  def parse_line(line)
+    point1, point2 = line.split(' -> ')
 
-def parse_point(point)
-  point.split(',').map { |value| value.to_i }
-end
+    {
+      point1: parse_point(point1),
+      point2: parse_point(point2),
+    }
+  end
 
-def mark_lines(lines)
-  diagram = {}
-  lines.each { |line| mark_line(line, diagram) }
-  diagram
-end
+  def parse_point(point)
+    point.split(',').map { |value| value.to_i }
+  end
 
-def mark_line(line, diagram)
-  if line[:point1][0] == line[:point2][0] || line[:point1][1] == line[:point2][1]
-    x1, x2 = [line[:point1][0], line[:point2][0]].sort
-    y1, y2 = [line[:point1][1], line[:point2][1]].sort
-    (x1..x2).each do |x|
-      (y1..y2).each do |y|
-        diagram.key?([x, y]) ? diagram[[x, y]] += 1 : diagram.store([x, y], 1)
+  def mark_lines(lines)
+    diagram = {}
+    lines.each { |line| mark_line(line, diagram) }
+    diagram
+  end
+
+  def mark_line(line, diagram)
+    if line[:point1][0] == line[:point2][0] || line[:point1][1] == line[:point2][1]
+      x1, x2 = [line[:point1][0], line[:point2][0]].sort
+      y1, y2 = [line[:point1][1], line[:point2][1]].sort
+      (x1..x2).each do |x|
+        (y1..y2).each do |y|
+          diagram.key?([x, y]) ? diagram[[x, y]] += 1 : diagram.store([x, y], 1)
+        end
       end
     end
-  end
 
-  if (line[:point1][0] - line[:point2][0]).abs == (line[:point1][1] - line[:point2][1]).abs
-    x1, x2 = [line[:point1][0], line[:point2][0]].sort
-    y1, y2 = [line[:point1][1], line[:point2][1]].sort
+    if (line[:point1][0] - line[:point2][0]).abs == (line[:point1][1] - line[:point2][1]).abs
+      x1, x2 = [line[:point1][0], line[:point2][0]].sort
+      y1, y2 = [line[:point1][1], line[:point2][1]].sort
 
-    x = line[:point1][0] - line[:point2][0] < 0 ? (x1..x2).each.to_a : (x1..x2).each.to_a.reverse
-    y = line[:point1][1] - line[:point2][1] < 0 ? (y1..y2).each.to_a : (y1..y2).each.to_a.reverse
+      x = line[:point1][0] - line[:point2][0] < 0 ? (x1..x2).each.to_a : (x1..x2).each.to_a.reverse
+      y = line[:point1][1] - line[:point2][1] < 0 ? (y1..y2).each.to_a : (y1..y2).each.to_a.reverse
 
-    x.size.times do |i|
-      diagram.key?([x[i], y[i]]) ? diagram[[x[i], y[i]]] += 1 : diagram.store([x[i], y[i]], 1)
+      x.size.times do |i|
+        diagram.key?([x[i], y[i]]) ? diagram[[x[i], y[i]]] += 1 : diagram.store([x[i], y[i]], 1)
+      end
     end
+    diagram
   end
-  diagram
-end
 
-def calculate_answer(diagram)
-  diagram.count { |key, value| value >= 2 }
+  def calculate_answer(diagram)
+    diagram.count { |_key, value| value >= 2 }
+  end
 end
 
 if __FILE__ == $0
 
-  input_data = read_file
+  input_data = Task005a.read_file
   return if input_data.nil?
 
-  lines = parse_input(input_data)
+  lines = Task005a.parse_input(input_data)
 
-  diagram = mark_lines(lines)
+  diagram = Task005a.mark_lines(lines)
 
-  answer = calculate_answer(diagram)
+  answer = Task005a.calculate_answer(diagram)
   puts("Answer: #{answer}")
 end

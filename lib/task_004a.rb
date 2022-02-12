@@ -64,66 +64,70 @@ require_relative 'read_file'
 #
 # Figure out which board will win last.
 
-def parse_input(input_data)
-  [input_data.split[0].split(',').map { |variable| variable.to_i }].concat(
-    [input_data.split[1...nil].map { |variable| variable.to_i }.each_slice(5).to_a.each_slice(5).to_a],
-  )
-end
+module Task004a
+  module_function
 
-def check_board(numbers, board)
-  board.each do |ary|
-    return 1 if ary.select { |value| numbers.include?(value) }.size == 5
+  def parse_input(input_data)
+    [input_data.split[0].split(',').map { |variable| variable.to_i }].concat(
+      [input_data.split[1...nil].map { |variable| variable.to_i }.each_slice(5).to_a.each_slice(5).to_a],
+    )
   end
-  5.times do |j|
-    temp = []
-    5.times do |i|
-      temp << board[i][j]
-      return 1 if temp.select { |value| numbers.include?(value) }.size == 5
+
+  def check_board(numbers, board)
+    board.each do |ary|
+      return 1 if ary.select { |value| numbers.include?(value) }.size == 5
     end
-  end
-  nil
-end
-
-def find_winners(puzzle_input)
-  results = { winners: [], numbers_drawn: 0 }
-  puzzle_input[0].size.times do |numbers_drawn|
-    puzzle_input[1].size.times do |board_number|
-      if check_board(puzzle_input[0][0..numbers_drawn],
-        puzzle_input[1][board_number]) && !results[:winners].include?(board_number)
-        results[:winners] << board_number
-      end
-      if results[:winners].size == puzzle_input[1].size
-        results[:numbers_drawn] = numbers_drawn
-        return results
+    5.times do |j|
+      temp = []
+      5.times do |i|
+        temp << board[i][j]
+        return 1 if temp.select { |value| numbers.include?(value) }.size == 5
       end
     end
+    nil
   end
-  nil
-end
 
-def sum_unmarked_numbers(puzzle_input, results)
-  sum = 0
-  puzzle_input[1][results[:winners][-1]].each do |numbers|
-    numbers.each do |value|
-      sum += value unless puzzle_input[0][0..results[:numbers_drawn]].include?(value)
+  def find_winners(puzzle_input)
+    results = { winners: [], numbers_drawn: 0 }
+    puzzle_input[0].size.times do |numbers_drawn|
+      puzzle_input[1].size.times do |board_number|
+        if check_board(puzzle_input[0][0..numbers_drawn],
+          puzzle_input[1][board_number]) && !results[:winners].include?(board_number)
+          results[:winners] << board_number
+        end
+        if results[:winners].size == puzzle_input[1].size
+          results[:numbers_drawn] = numbers_drawn
+          return results
+        end
+      end
     end
+    nil
   end
-  sum
-end
 
-def calculate_answer(puzzle_input)
-  results = find_winners(puzzle_input)
+  def sum_unmarked_numbers(puzzle_input, results)
+    sum = 0
+    puzzle_input[1][results[:winners][-1]].each do |numbers|
+      numbers.each do |value|
+        sum += value unless puzzle_input[0][0..results[:numbers_drawn]].include?(value)
+      end
+    end
+    sum
+  end
 
-  sum_unmarked_numbers(puzzle_input, results) * puzzle_input[0][results[:numbers_drawn]]
+  def calculate_answer(puzzle_input)
+    results = find_winners(puzzle_input)
+
+    sum_unmarked_numbers(puzzle_input, results) * puzzle_input[0][results[:numbers_drawn]]
+  end
 end
 
 if __FILE__ == $0
 
-  input_data = read_file
+  input_data = Task004a.read_file
   return if input_data.nil?
 
-  puzzle_input = parse_input(input_data)
+  puzzle_input = Task004a.parse_input(input_data)
 
-  answer = calculate_answer(puzzle_input)
+  answer = Task004a.calculate_answer(puzzle_input)
   puts("Answer : #{answer}")
 end
