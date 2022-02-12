@@ -28,3 +28,4 @@ You can just download repository, go to **<em> ./lib </em>** and run each script
       ruby task_003.rb input3
 
    where input3 is a name of input data file.
+
