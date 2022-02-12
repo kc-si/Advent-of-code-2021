@@ -17,7 +17,11 @@
 
 ## Installation:
 
-You can just download repository, go to **<em> ./lib </em>** and run each scripts from command line,  exmaple :
+You can just download repository, install gem libraries: To install go to main of this repository and run from command line:
+
+  bundle install
+
+Now go to **<em> ./lib </em>** and run each scripts from command line,  exmaple :
 
       ruby task_002.rb
 
