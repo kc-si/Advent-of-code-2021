@@ -20,17 +20,16 @@
 1. Download repository
 2. Install gem libraries: to install go to main of this repository and run from command line:
 
-    bundle install
+       bundle install
 
 3. Now go to **<em> ./lib </em>** and run each scripts from command line,  exmaple :
 
+       ruby task_002.rb
 
-    ruby task_002.rb
-
-    then scripts ask you for input data file name :**<em> input2 </em>**for this task
+ then scripts ask you for input data file name : **<em> input2 </em>** for this task
 
 or starting from day 3 task you can use form:
 
     ruby task_003.rb input3
 
-where input3 is a name of input data file.
+where **<em> input3 </em>** is a name of input data file.
