@@ -111,7 +111,7 @@ end
 
 if __FILE__ == $0
 
-  input_data = Task005a.read_file
+  input_data = read_file
   return if input_data.nil?
 
   answer = Task005a.calculate_answer(input_data)

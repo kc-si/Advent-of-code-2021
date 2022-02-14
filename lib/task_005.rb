@@ -1,4 +1,5 @@
 require_relative 'read_file'
+# require 'debug'
 
 # They tend to form in lines; the submarine helpfully produces a list of nearby lines of vents (your puzzle input)
 # for you to review. For example:
@@ -48,21 +49,40 @@ require_relative 'read_file'
 module Task005
   module_function
 
+  class Point
+    attr_reader :x, :y
+
+    def initialize(x:, y:)
+      @x = x
+      @y = y
+    end
+
+    def self.build_from_str(point)
+      Point.new(
+        x: point.split(',').map(&:to_i)[0],
+        y: point.split(',').map(&:to_i)[1],
+      )
+    end
+  end
+
+  class Line
+    attr_reader :point1, :point2
+
+    def initialize(point1:, point2:)
+      @point1 = point1
+      @point2 = point2
+    end
+
+    def self.build_from_hash_line(line)
+      Line.new(
+        point1: Point.build_from_str(line.split(' -> ')[0]),
+        point2: Point.build_from_str(line.split(' -> ')[1]),
+      )
+    end
+  end
+
   def parse_input(input_data)
-    input_data.split("\n").map { |line| parse_line(line) }
-  end
-
-  def parse_line(line)
-    point1, point2 = line.split(' -> ')
-
-    {
-      point1: parse_point(point1),
-      point2: parse_point(point2),
-    }
-  end
-
-  def parse_point(point)
-    point.split(',').map { |value| value.to_i }
+    input_data.split("\n").map { |line| Line.build_from_hash_line(line) }
   end
 
   def mark_lines(lines)
@@ -72,9 +92,9 @@ module Task005
   end
 
   def mark_line(line, diagram)
-    if line[:point1][0] == line[:point2][0] || line[:point1][1] == line[:point2][1]
-      x1, x2 = [line[:point1][0], line[:point2][0]].sort
-      y1, y2 = [line[:point1][1], line[:point2][1]].sort
+    if line.point1.x == line.point2.x || line.point1.y == line.point2.y
+      x1, x2 = [line.point1.x, line.point2.x].sort
+      y1, y2 = [line.point1.y, line.point2.y].sort
       (x1..x2).each do |x|
         (y1..y2).each do |y|
           diagram.key?([x, y]) ? diagram[[x, y]] += 1 : diagram.store([x, y], 1)
@@ -93,7 +113,7 @@ end
 
 if __FILE__ == $0
 
-  input_data = Task005.read_file
+  input_data = read_file
   return if input_data.nil?
 
   answer = Task005.calculate_answer(input_data)
