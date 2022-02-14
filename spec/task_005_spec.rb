@@ -1,4 +1,5 @@
 require './lib/task_005'
+require 'debug'
 
 RSpec.describe 'parse_input(input_data)' do
   it ' parses input data ' do
@@ -10,7 +11,7 @@ RSpec.describe 'parse_input(input_data)' do
 
     lines = Task005.parse_input(input)
 
-    expect(lines.map {|line| line.class }).to eq(
+    expect(lines.map(&:class)).to eq(
       [
         Task005::Line,
         Task005::Line,
