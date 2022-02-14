@@ -1,5 +1,4 @@
 require_relative 'read_file'
-require 'debug'
 
 # They tend to form in lines; the submarine helpfully produces a list of nearby lines of vents (your puzzle input)
 # for you to review. For example:
