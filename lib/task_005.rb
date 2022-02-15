@@ -49,7 +49,7 @@ require_relative 'task_005_lib'
 module Task005
   module_function
 
-  def calculate_answer_005(input_data)
+  def calculate_answer(input_data)
     lines = parse_input(input_data)
 
     diagram = Diagram.new.mark_horizontal_and_vertical(lines)
@@ -62,7 +62,7 @@ if __FILE__ == $0
   input_data = read_file
   return if input_data.nil?
 
-  answer = Task005.calculate_answer_005(input_data)
+  answer = Task005.calculate_answer(input_data)
 
   puts("Answer: #{answer}")
 end

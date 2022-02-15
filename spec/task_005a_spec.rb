@@ -10,7 +10,7 @@ RSpec.describe 'calculate_answer_005a(diagram)' do
       0,1 -> 3,4
     INPUT
 
-    answer = Task005.calculate_answer_005a(input)
+    answer = Task005a.calculate_answer(input)
 
     expect(answer).to eq(5)
   end

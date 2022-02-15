@@ -25,13 +25,13 @@ RSpec.describe 'parse_input(input_data)' do
   end
 end
 
-RSpec.describe 'horizontal_or_vertical?(line) answer true if line horizontal or vertical:' do
+RSpec.describe 'horizontal_or_vertical? answer true if line horizontal or vertical:' do
   it 'checks vertical line' do
     point1 = Task005::Point.new(2, 4)
     point2 = Task005::Point.new(2, 6)
     line = Task005::Line.new(point1, point2)
 
-    reply = line.horizontal_or_vertical?(line)
+    reply = line.horizontal_or_vertical?
 
     expect(reply).to eq(true)
   end
@@ -41,7 +41,7 @@ RSpec.describe 'horizontal_or_vertical?(line) answer true if line horizontal or 
     point2 = Task005::Point.new(2, 4)
     line = Task005::Line.new(point1, point2)
 
-    reply = line.horizontal_or_vertical?(line)
+    reply = line.horizontal_or_vertical?
 
     expect(reply).to eq(true)
   end
@@ -51,7 +51,7 @@ RSpec.describe 'horizontal_or_vertical?(line) answer true if line horizontal or 
     point2 = Task005::Point.new(2, 4)
     line = Task005::Line.new(point1, point2)
 
-    reply = line.horizontal_or_vertical?(line)
+    reply = line.horizontal_or_vertical?
 
     expect(reply).to eq(false)
   end
@@ -63,7 +63,7 @@ RSpec.describe 'degree_45?(line) answer true if line go with 45 degrees:' do
     point2 = Task005::Point.new(12, 14)
     line = Task005::Line.new(point1, point2)
 
-    reply = line.degree_45?(line)
+    reply = line.degree_45?
 
     expect(reply).to eq(true)
   end
@@ -73,7 +73,7 @@ RSpec.describe 'degree_45?(line) answer true if line go with 45 degrees:' do
     point2 = Task005::Point.new(2, 4)
     line = Task005::Line.new(point1, point2)
 
-    reply = line.degree_45?(line)
+    reply = line.degree_45?
 
     expect(reply).to eq(false)
   end
@@ -85,7 +85,7 @@ RSpec.describe 'points_on_line(line) create array with points covered by' do
     point2 = Task005::Point.new(2, 6)
     line = Task005::Line.new(point1, point2)
 
-    points = line.points_on_line(line)
+    points = line.points_on_line
 
     expect(points).to eq([[2, 4], [2, 5], [2, 6]])
   end
@@ -95,7 +95,7 @@ RSpec.describe 'points_on_line(line) create array with points covered by' do
     point2 = Task005::Point.new(4, 6)
     line = Task005::Line.new(point1, point2)
 
-    points = line.points_on_line(line)
+    points = line.points_on_line
 
     expect(points).to eq([[2, 4], [3, 5], [4, 6]])
   end

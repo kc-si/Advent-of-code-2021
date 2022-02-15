@@ -52,13 +52,13 @@ require_relative 'task_005_lib'
 # Because of the limits of the hydrothermal vent mapping system, the lines in your list will only
 # ever be horizontal, vertical, or a diagonal line at exactly 45 degrees.
 
-module Task005
+module Task005a
   module_function
 
-  def calculate_answer_005a(input_data)
-    lines = parse_input(input_data)
+  def calculate_answer(input_data)
+    lines = Task005.parse_input(input_data)
 
-    diagram = Diagram.new.mark_horizontal_vertical_45_degree(lines)
+    diagram = Task005::Diagram.new.mark_horizontal_vertical_45_degree(lines)
     diagram.count { |_key, value| value >= 2 }
   end
 end
@@ -68,7 +68,7 @@ if __FILE__ == $0
   input_data = read_file
   return if input_data.nil?
 
-  answer = Task005.calculate_answer_005a(input_data)
+  answer = Task005a.calculate_answer(input_data)
 
   puts("Answer: #{answer}")
 end
