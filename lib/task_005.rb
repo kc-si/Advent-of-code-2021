@@ -86,7 +86,6 @@ module Task005
     end
 
     def mark_lines(lines)
-      diagram = {}
       lines.each { |line| mark_line(line, diagram) }
       diagram
     end
