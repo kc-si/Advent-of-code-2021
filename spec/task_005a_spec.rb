@@ -1,30 +1,5 @@
 require './lib/task_005a'
 
-RSpec.describe 'parse_input(input_data)' do
-  it ' parses input data ' do
-    input = <<~INPUT
-      0,9 -> 5,9
-      8,0 -> 0,8
-      9,4 -> 3,4
-    INPUT
-
-    lines = Task005.parse_input(input)
-
-    expect(lines[0]).to have_attributes(
-      point1: have_attributes(x: 0, y: 9),
-      point2: have_attributes(x: 5, y: 9),
-    )
-    expect(lines[1]).to have_attributes(
-      point1: have_attributes(x: 8, y: 0),
-      point2: have_attributes(x: 0, y: 8),
-    )
-    expect(lines[2]).to have_attributes(
-      point1: have_attributes(x: 9, y: 4),
-      point2: have_attributes(x: 3, y: 4),
-    )
-  end
-end
-
 RSpec.describe 'calculate_answer_005a(diagram)' do
   it 'it calculate how many values of diagram hash are greater than 2' do
     input = <<~INPUT
