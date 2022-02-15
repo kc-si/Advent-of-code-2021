@@ -10,12 +10,17 @@ RSpec.describe 'parse_input(input_data)' do
 
     lines = Task005.parse_input(input)
 
-    expect(lines.map(&:class)).to eq(
-      [
-        Task005::Line,
-        Task005::Line,
-        Task005::Line,
-      ],
+    expect(lines[0]).to have_attributes(
+      point1: have_attributes(x: 0, y: 9),
+      point2: have_attributes(x: 5, y: 9),
+    )
+    expect(lines[1]).to have_attributes(
+      point1: have_attributes(x: 8, y: 0),
+      point2: have_attributes(x: 0, y: 8),
+    )
+    expect(lines[2]).to have_attributes(
+      point1: have_attributes(x: 9, y: 4),
+      point2: have_attributes(x: 3, y: 4),
     )
   end
 end

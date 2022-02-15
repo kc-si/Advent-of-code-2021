@@ -4,51 +4,28 @@ module Task005
   class Point
     attr_reader :x, :y
 
+    def self.from_input(point)
+      x, y = point.split(',').map(&:to_i)
+      Point.new(x, y)
+    end
+
     def initialize(x, y)
       @x = x
       @y = y
-    end
-
-    def self.build_from_str(point)
-      x, y = point.split(',').map(&:to_i)
-      Point.new(x, y)
     end
   end
 
   class Line
     attr_reader :point1, :point2
 
+    def self.from_input(line)
+      point1, point2 = line.split(' -> ').map { |point| Point.from_input(point) }
+      Line.new(point1, point2)
+    end
+
     def initialize(point1, point2)
       @point1 = point1
       @point2 = point2
-    end
-
-    def self.build_from_hash_line(line)
-      Line.new(
-        Point.build_from_str(line.split(' -> ')[0]),
-        Point.build_from_str(line.split(' -> ')[1]),
-      )
-    end
-  end
-
-  class Diagram
-    attr_accessor :diagram
-
-    def initialize(diagram = {})
-      @diagram = diagram
-    end
-
-    def mark_horizontal_and_vertical(lines)
-      lines.each { |line| horizontal_or_vertical?(line) ? mark_horizontal_or_vertical(line) : nil }
-      diagram
-    end
-
-    def mark_horizontal_vertical_45_degree(lines)
-      lines.each do |line|
-        horizontal_or_vertical?(line) ? mark_horizontal_or_vertical(line) : nil
-        degree_45?(line) ? mark_45_degree(line) : nil
-      end
-      diagram
     end
 
     def horizontal_or_vertical?(line)
@@ -59,30 +36,60 @@ module Task005
       (line.point1.x - line.point2.x).abs == (line.point1.y - line.point2.y).abs
     end
 
-    def mark_horizontal_or_vertical(line)
-      x1, x2 = [line.point1.x, line.point2.x].sort
-      y1, y2 = [line.point1.y, line.point2.y].sort
-      (x1..x2).each do |x|
-        (y1..y2).each do |y|
-          diagram.key?([x, y]) ? diagram[[x, y]] += 1 : diagram.store([x, y], 1)
+    def points_on_line(line)
+      if horizontal_or_vertical?(line)
+        points = []
+        x1, x2 = [line.point1.x, line.point2.x].sort
+        y1, y2 = [line.point1.y, line.point2.y].sort
+        (x1..x2).each do |x|
+          (y1..y2).each do |y|
+            points << [x, y]
+          end
         end
+      elsif degree_45?(line)
+        points = []
+        x1, x2 = [line.point1.x, line.point2.x].sort
+        y1, y2 = [line.point1.y, line.point2.y].sort
+
+        x = line.point1.x - line.point2.x < 0 ? (x1..x2).each.to_a : (x1..x2).each.to_a.reverse
+        y = line.point1.y - line.point2.y < 0 ? (y1..y2).each.to_a : (y1..y2).each.to_a.reverse
+
+        x.size.times do |i|
+          points << [x[i], y[i]]
+        end
+      end
+      points
+    end
+  end
+
+  class Diagram
+    attr_accessor :diagram
+
+    def initialize(diagram = {})
+      @diagram = diagram
+    end
+
+    def mark_line(line)
+      line.points_on_line(line).each do |x, y|
+        @diagram.key?([x, y]) ? @diagram[[x, y]] += 1 : @diagram.store([x, y], 1)
       end
     end
 
-    def mark_45_degree(line)
-      x1, x2 = [line.point1.x, line.point2.x].sort
-      y1, y2 = [line.point1.y, line.point2.y].sort
+    def mark_horizontal_and_vertical(lines)
+      lines.each { |line| line.horizontal_or_vertical?(line) ? mark_line(line) : nil }
+      @diagram
+    end
 
-      x = line.point1.x - line.point2.x < 0 ? (x1..x2).each.to_a : (x1..x2).each.to_a.reverse
-      y = line.point1.y - line.point2.y < 0 ? (y1..y2).each.to_a : (y1..y2).each.to_a.reverse
-
-      x.size.times do |i|
-        diagram.key?([x[i], y[i]]) ? diagram[[x[i], y[i]]] += 1 : diagram.store([x[i], y[i]], 1)
+    def mark_horizontal_vertical_45_degree(lines)
+      lines.each do |line|
+        line.horizontal_or_vertical?(line) ? mark_line(line) : nil
+        line.degree_45?(line) ? mark_line(line) : nil
       end
+      @diagram
     end
   end
 
   def parse_input(input_data)
-    input_data.split("\n").map { |line| Line.build_from_hash_line(line) }
+    input_data.split("\n").map { |line| Line.from_input(line) }
   end
 end
