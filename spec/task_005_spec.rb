@@ -1,5 +1,4 @@
 require './lib/task_005'
-require 'debug'
 
 RSpec.describe 'parse_input(input_data)' do
   it ' parses input data ' do
@@ -30,7 +29,7 @@ RSpec.describe 'calculate_answer(input_data)' do
       0,2 -> 3,2
     INPUT
 
-    answer = Task005.calculate_answer(input)
+    answer = Task005.calculate_answer_005(input)
 
     expect(answer).to eq(3)
   end

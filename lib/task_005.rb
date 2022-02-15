@@ -1,4 +1,5 @@
 require_relative 'read_file'
+require_relative 'task_005_lib'
 
 # They tend to form in lines; the submarine helpfully produces a list of nearby lines of vents (your puzzle input)
 # for you to review. For example:
@@ -48,69 +49,10 @@ require_relative 'read_file'
 module Task005
   module_function
 
-  class Point
-    attr_reader :x, :y
-
-    def initialize(x, y)
-      @x = x
-      @y = y
-    end
-
-    def self.build_from_str(point)
-      x, y = point.split(',').map(&:to_i)
-      Point.new(x, y)
-    end
-  end
-
-  class Line
-    attr_reader :point1, :point2
-
-    def initialize(point1, point2)
-      @point1 = point1
-      @point2 = point2
-    end
-
-    def self.build_from_hash_line(line)
-      Line.new(
-        Point.build_from_str(line.split(' -> ')[0]),
-        Point.build_from_str(line.split(' -> ')[1]),
-      )
-    end
-  end
-
-  class Diagram
-    attr_accessor :diagram
-
-    def initialize(diagram = {})
-      @diagram = diagram
-    end
-
-    def mark_lines(lines)
-      lines.each { |line| mark_line(line, diagram) }
-      diagram
-    end
-
-    def mark_line(line, diagram)
-      if line.point1.x == line.point2.x || line.point1.y == line.point2.y
-        x1, x2 = [line.point1.x, line.point2.x].sort
-        y1, y2 = [line.point1.y, line.point2.y].sort
-        (x1..x2).each do |x|
-          (y1..y2).each do |y|
-            diagram.key?([x, y]) ? diagram[[x, y]] += 1 : diagram.store([x, y], 1)
-          end
-        end
-      end
-    end
-  end
-
-  def parse_input(input_data)
-    input_data.split("\n").map { |line| Line.build_from_hash_line(line) }
-  end
-
-  def calculate_answer(input_data)
+  def calculate_answer_005(input_data)
     lines = parse_input(input_data)
 
-    diagram = Diagram.new.mark_lines(lines)
+    diagram = Diagram.new.mark_horizontal_and_vertical(lines)
     diagram.count { |_key, value| value >= 2 }
   end
 end
@@ -120,7 +62,7 @@ if __FILE__ == $0
   input_data = read_file
   return if input_data.nil?
 
-  answer = Task005.calculate_answer(input_data)
+  answer = Task005.calculate_answer_005(input_data)
 
   puts("Answer: #{answer}")
 end
