@@ -28,64 +28,79 @@ module Task005
       @point2 = point2
     end
 
+    def horizontal?
+      @point1.y == @point2.y
+    end
+
+    def vertical?
+      @point1.x == @point2.x
+    end
+
     def horizontal_or_vertical?
-      @point1.x == @point2.x || @point1.y == @point2.y
+      horizontal? || vertical?
     end
 
     def degree_45?
       (@point1.x - @point2.x).abs == (@point1.y - @point2.y).abs
     end
 
-    def points_on_line
-      if horizontal_or_vertical?
-        points = []
-        x1, x2 = [@point1.x, @point2.x].sort
-        y1, y2 = [@point1.y, @point2.y].sort
-        (x1..x2).each do |x|
-          (y1..y2).each do |y|
-            points << [x, y]
-          end
-        end
-      elsif degree_45?
-        points = []
-        x1, x2 = [@point1.x, @point2.x].sort
-        y1, y2 = [@point1.y, @point2.y].sort
-
-        x = @point1.x - @point2.x < 0 ? (x1..x2).each.to_a : (x1..x2).each.to_a.reverse
-        y = @point1.y - @point2.y < 0 ? (y1..y2).each.to_a : (y1..y2).each.to_a.reverse
-
-        x.size.times do |i|
-          points << [x[i], y[i]]
+    def points_on_horizontal_or_vertical
+      x1, x2 = [@point1.x, @point2.x].sort
+      y1, y2 = [@point1.y, @point2.y].sort
+      (x1..x2).flat_map do |x|
+        (y1..y2).map do |y|
+          [x, y]
         end
       end
-      points
+    end
+
+    def points_on_degree_45
+      x1, x2 = [@point1.x, @point2.x].sort
+      y1, y2 = [@point1.y, @point2.y].sort
+
+      x = @point1.x - @point2.x < 0 ? (x1..x2).each.to_a : (x1..x2).each.to_a.reverse
+      y = @point1.y - @point2.y < 0 ? (y1..y2).each.to_a : (y1..y2).each.to_a.reverse
+      x.each_with_index.map { |x, i| [x, y[i]] }
+    end
+
+    def points_on_line
+      if horizontal_or_vertical?
+        points_on_horizontal_or_vertical
+      elsif degree_45?
+        points_on_degree_45
+      else
+        raise NotImplementedError, 'The lines other than horizontal/vertical/45 degree are not supported yet!'
+      end
     end
   end
 
   class Diagram
-    attr_accessor :diagram
+    attr_reader :diagram
 
     def initialize(diagram = {})
       @diagram = diagram
     end
 
+    def cover_point(point)
+      @diagram.key?(point) ? @diagram[point] += 1 : @diagram.store(point, 1)
+    end
+
     def mark_line(line)
-      line.points_on_line.each do |x, y|
-        @diagram.key?([x, y]) ? @diagram[[x, y]] += 1 : @diagram.store([x, y], 1)
-      end
+      line.points_on_line.each { |point| cover_point(point) }
     end
 
     def mark_horizontal_and_vertical(lines)
-      lines.each { |line| line.horizontal_or_vertical? ? mark_line(line) : nil }
-      @diagram
+      lines.each { |line| mark_line(line) if line.horizontal_or_vertical? }
     end
 
     def mark_horizontal_vertical_45_degree(lines)
       lines.each do |line|
-        line.horizontal_or_vertical? ? mark_line(line) : nil
-        line.degree_45? ? mark_line(line) : nil
+        mark_line(line) if line.horizontal_or_vertical? || line.degree_45?
       end
-      @diagram
+    end
+
+    def count_values_greater_than_2
+      @diagram.count { |_key, value| value >= 2 }
     end
   end
 

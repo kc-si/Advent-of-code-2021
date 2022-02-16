@@ -52,8 +52,9 @@ module Task005
   def calculate_answer(input_data)
     lines = parse_input(input_data)
 
-    diagram = Diagram.new.mark_horizontal_and_vertical(lines)
-    diagram.count { |_key, value| value >= 2 }
+    diagram = Diagram.new
+    diagram.mark_horizontal_and_vertical(lines)
+    diagram.count_values_greater_than_2
   end
 end
 
