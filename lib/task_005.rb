@@ -51,10 +51,10 @@ module Task005
 
   def calculate_answer(input_data)
     lines = parse_input(input_data)
-
     diagram = Diagram.new
-    diagram.mark_horizontal_and_vertical(lines)
-    diagram.count_values_greater_than_2
+
+    lines.each { |line| diagram.mark_line(line) if line.horizontal_or_vertical? }
+    diagram.count_points_with_min_coverage
   end
 end
 

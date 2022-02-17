@@ -13,6 +13,18 @@ module Task005
       @x = x
       @y = y
     end
+
+    def ==(other)
+      self.class === other &&
+        @x == other.x &&
+        @y == other.y
+    end
+
+    alias eql? ==
+
+    def hash
+      @x.hash ^ @y.hash
+    end
   end
 
   class Line
@@ -28,39 +40,12 @@ module Task005
       @point2 = point2
     end
 
-    def horizontal?
-      @point1.y == @point2.y
-    end
-
-    def vertical?
-      @point1.x == @point2.x
-    end
-
     def horizontal_or_vertical?
       horizontal? || vertical?
     end
 
     def degree_45?
       (@point1.x - @point2.x).abs == (@point1.y - @point2.y).abs
-    end
-
-    def points_on_horizontal_or_vertical
-      x1, x2 = [@point1.x, @point2.x].sort
-      y1, y2 = [@point1.y, @point2.y].sort
-      (x1..x2).flat_map do |x|
-        (y1..y2).map do |y|
-          [x, y]
-        end
-      end
-    end
-
-    def points_on_degree_45
-      x1, x2 = [@point1.x, @point2.x].sort
-      y1, y2 = [@point1.y, @point2.y].sort
-
-      x = @point1.x - @point2.x < 0 ? (x1..x2).each.to_a : (x1..x2).each.to_a.reverse
-      y = @point1.y - @point2.y < 0 ? (y1..y2).each.to_a : (y1..y2).each.to_a.reverse
-      x.each_with_index.map { |x, i| [x, y[i]] }
     end
 
     def points_on_line
@@ -72,35 +57,59 @@ module Task005
         raise NotImplementedError, 'The lines other than horizontal/vertical/45 degree are not supported yet!'
       end
     end
+
+    private
+
+    def horizontal?
+      @point1.y == @point2.y
+    end
+
+    def vertical?
+      @point1.x == @point2.x
+    end
+
+    def horizontal_range
+      beginning, ending = [@point1.x, @point2.x].sort
+      beginning..ending
+    end
+
+    def vertical_range
+      beginning, ending = [@point1.y, @point2.y].sort
+      beginning..ending
+    end
+
+    def points_on_horizontal_or_vertical
+      horizontal_range.flat_map do |x|
+        vertical_range.map do |y|
+          Point.new(x, y)
+        end
+      end
+    end
+
+    def points_on_degree_45
+      x = @point1.x - @point2.x < 0 ? horizontal_range.to_a : horizontal_range.to_a.reverse
+      y = @point1.y - @point2.y < 0 ? vertical_range.to_a : vertical_range.to_a.reverse
+      x.each_with_index.map { |x, i| Point.new(x, y[i]) }
+    end
   end
 
   class Diagram
-    attr_reader :diagram
-
     def initialize(diagram = {})
       @diagram = diagram
-    end
-
-    def cover_point(point)
-      @diagram.key?(point) ? @diagram[point] += 1 : @diagram.store(point, 1)
     end
 
     def mark_line(line)
       line.points_on_line.each { |point| cover_point(point) }
     end
 
-    def mark_horizontal_and_vertical(lines)
-      lines.each { |line| mark_line(line) if line.horizontal_or_vertical? }
+    def count_points_with_min_coverage
+      @diagram.count { |_point, coverage| coverage >= 2 }
     end
 
-    def mark_horizontal_vertical_45_degree(lines)
-      lines.each do |line|
-        mark_line(line) if line.horizontal_or_vertical? || line.degree_45?
-      end
-    end
+    private
 
-    def count_values_greater_than_2
-      @diagram.count { |_key, value| value >= 2 }
+    def cover_point(point)
+      @diagram.key?(point) ? @diagram[point] += 1 : @diagram.store(point, 1)
     end
   end
 
