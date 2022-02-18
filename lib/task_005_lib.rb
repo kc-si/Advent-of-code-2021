@@ -89,7 +89,7 @@ module Task005
     def points_on_degree_45
       x = @point1.x - @point2.x < 0 ? horizontal_range.to_a : horizontal_range.to_a.reverse
       y = @point1.y - @point2.y < 0 ? vertical_range.to_a : vertical_range.to_a.reverse
-      x.each_with_index.map { |x, i| Point.new(x, y[i]) }
+      x.zip(y).map { |x, y| Point.new(x, y) }
     end
   end
 

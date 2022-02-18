@@ -31,7 +31,7 @@ end
 
 RSpec.describe Task005::Line do
   describe '#horizontal_or_vertical?' do
-    context ': when the line is vertical' do
+    context 'when the line is vertical' do
       it 'returns true' do
         point1 = Task005::Point.new(2, 4)
         point2 = Task005::Point.new(2, 6)
@@ -43,7 +43,7 @@ RSpec.describe Task005::Line do
       end
     end
 
-    context ': when the line is horizontal' do
+    context 'when the line is horizontal' do
       it 'returns true' do
         point1 = Task005::Point.new(1, 4)
         point2 = Task005::Point.new(2, 4)
@@ -55,7 +55,7 @@ RSpec.describe Task005::Line do
       end
     end
 
-    context ': when the line is no horizontal and no vertical' do
+    context 'when the line is no horizontal and no vertical' do
       it 'returns false' do
         point1 = Task005::Point.new(1, 3)
         point2 = Task005::Point.new(2, 4)
@@ -69,7 +69,7 @@ RSpec.describe Task005::Line do
   end
 
   describe '#degree_45?' do
-    context ': when the line is 45 degree' do
+    context 'when the line is 45 degree' do
       it 'return true' do
         point1 = Task005::Point.new(2, 4)
         point2 = Task005::Point.new(12, 14)
@@ -81,7 +81,7 @@ RSpec.describe Task005::Line do
       end
     end
 
-    context ': when the line is no 45 degree' do
+    context 'when the line is no 45 degree' do
       it 'return false' do
         point1 = Task005::Point.new(1, 4)
         point2 = Task005::Point.new(2, 4)
@@ -95,7 +95,7 @@ RSpec.describe Task005::Line do
   end
 
   describe '#points_on_line' do
-    context ': when horizontal line' do
+    context 'when horizontal or vertical line' do
       it 'it create array of point covered by line' do
         point1 = Task005::Point.new(2, 4)
         point2 = Task005::Point.new(2, 6)
@@ -111,7 +111,7 @@ RSpec.describe Task005::Line do
       end
     end
 
-    context ': when 45 degree line' do
+    context 'when 45 degree line' do
       it 'it create array of point covered by 45 degree line' do
         point1 = Task005::Point.new(2, 4)
         point2 = Task005::Point.new(4, 6)
