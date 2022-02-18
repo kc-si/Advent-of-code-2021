@@ -123,7 +123,7 @@ end
 
 if __FILE__ == $0
 
-  input_data = Task004a.read_file
+  input_data = read_file
   return if input_data.nil?
 
   puzzle_input = Task004a.parse_input(input_data)

@@ -1,4 +1,5 @@
 require_relative 'read_file'
+require_relative 'task_005_lib'
 
 # They tend to form in lines; the submarine helpfully produces a list of nearby lines of vents (your puzzle input)
 # for you to review. For example:
@@ -48,52 +49,18 @@ require_relative 'read_file'
 module Task005
   module_function
 
-  def parse_input(input_data)
-    input_data.split("\n").map { |line| parse_line(line) }
-  end
-
-  def parse_line(line)
-    point1, point2 = line.split(' -> ')
-
-    {
-      point1: parse_point(point1),
-      point2: parse_point(point2),
-    }
-  end
-
-  def parse_point(point)
-    point.split(',').map { |value| value.to_i }
-  end
-
-  def mark_lines(lines)
-    diagram = {}
-    lines.each { |line| mark_line(line, diagram) }
-    diagram
-  end
-
-  def mark_line(line, diagram)
-    if line[:point1][0] == line[:point2][0] || line[:point1][1] == line[:point2][1]
-      x1, x2 = [line[:point1][0], line[:point2][0]].sort
-      y1, y2 = [line[:point1][1], line[:point2][1]].sort
-      (x1..x2).each do |x|
-        (y1..y2).each do |y|
-          diagram.key?([x, y]) ? diagram[[x, y]] += 1 : diagram.store([x, y], 1)
-        end
-      end
-    end
-    diagram
-  end
-
   def calculate_answer(input_data)
     lines = parse_input(input_data)
-    diagram = mark_lines(lines)
-    diagram.count { |_key, value| value >= 2 }
+    diagram = Diagram.new
+
+    lines.each { |line| diagram.mark_line(line) if line.horizontal_or_vertical? }
+    diagram.count_points_with_min_coverage
   end
 end
 
 if __FILE__ == $0
 
-  input_data = Task005.read_file
+  input_data = read_file
   return if input_data.nil?
 
   answer = Task005.calculate_answer(input_data)

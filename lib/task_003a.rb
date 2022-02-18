@@ -118,7 +118,7 @@ if __FILE__ == $0
 
   #  main
 
-  input_data = Task003a.read_file
+  input_data = read_file
   return if input_data.nil?
 
   answer = Task003a.calculate_life_support_rating(input_data)

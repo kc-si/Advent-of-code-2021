@@ -5,7 +5,7 @@
 
  **test/lib**  - scripts for task - each file named  **<em> task_0xxx.rb </em>**  works for task number (xxx), example :
 
-**<em> task_002.rb </em>**  - script for first task in day 2 in Advent of code  
+**<em> task_002.rb </em>**  - script for first task in day 2 in Advent of code
 **<em> task_002a.rb </em>**  - script for second task in day 2 in Advent of code
 
  files named **<em>  inputx  </em>** , input data files for exact day task, where <em> x </em> is a day number,  example :
@@ -17,19 +17,19 @@
 
 ## Installation:
 
-You can just download repository, install gem libraries: To install go to main of this repository and run from command line:
+1. Download repository
+2. Install gem libraries: to install go to main of this repository and run from command line:
 
-  bundle install
+       bundle install
 
-Now go to **<em> ./lib </em>** and run each scripts from command line,  exmaple :
+3. Now go to **<em> ./lib </em>** and run each scripts from command line,  exmaple :
 
+       ruby task_002.rb
 
-  ruby task_002.rb
-
-    then scripts ask you for input data file name : input2 for this task
+ then scripts ask you for input data file name : **<em> input2 </em>** for this task
 
 or starting from day 3 task you can use form:
 
-  ruby task_003.rb input3
+    ruby task_003.rb input3
 
-where input3 is a name of input data file.
+where **<em> input3 </em>** is a name of input data file.
